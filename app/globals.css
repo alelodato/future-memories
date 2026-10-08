@@ -13,6 +13,7 @@
   --color-beige: #e2d4c1; /* fasce in evidenza */
   --color-sabbia: #efe6da; /* sfondo principale */
   --color-crema: #f7f2ea; /* sezioni alternate */
+  --color-errore: #8c2f1f; /* messaggi di errore dei moduli */
 
   --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-montserrat), "Montserrat", Arial, sans-serif;
