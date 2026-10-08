@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Identità visiva Future Memories */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-marrone: #2a1e16; /* testi, logo, pulsanti */
+  --color-marrone-medio: #5a4637; /* testi secondari */
+  --color-beige-scuro: #d9c8b2; /* fondi di foto e video */
+  --color-beige: #e2d4c1; /* fasce in evidenza */
+  --color-sabbia: #efe6da; /* sfondo principale */
+  --color-crema: #f7f2ea; /* sezioni alternate */
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-montserrat), "Montserrat", Arial, sans-serif;
+
+  --tracking-label: 0.25em;
+}
+
+:root {
+  /* Altezza della navbar sticky: usata per compensare lo scroll alle ancore */
+  --navbar-height: 4.5rem;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --navbar-height: 6rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-sabbia);
+  color: var(--color-marrone);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-marrone);
+  color: var(--color-crema);
+}
