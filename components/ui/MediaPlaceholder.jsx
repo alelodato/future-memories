@@ -14,12 +14,14 @@ export default function MediaPlaceholder({
   play = false,
   tone = "dark",
   className = "",
+  style,
   children,
 }) {
   return (
     <div
       role="img"
       aria-label={label || "Contenuto multimediale in arrivo"}
+      style={style}
       className={`relative flex items-center justify-center overflow-hidden text-marrone ${tones[tone]} ${className}`}
     >
       {play && <PlayIcon className="h-14 w-14 lg:h-20 lg:w-20" />}

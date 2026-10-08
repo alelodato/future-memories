@@ -51,10 +51,13 @@ export function getWork(slug) {
   return portfolio.find((work) => work.slug === slug);
 }
 
+// Navigazione circolare: dal primo lavoro si torna all'ultimo e viceversa.
 export function getAdjacentWorks(slug) {
   const index = portfolio.findIndex((work) => work.slug === slug);
+  if (index === -1 || portfolio.length < 2) return { previous: null, next: null };
+  const total = portfolio.length;
   return {
-    previous: index > 0 ? portfolio[index - 1] : null,
-    next: index >= 0 && index < portfolio.length - 1 ? portfolio[index + 1] : null,
+    previous: portfolio[(index - 1 + total) % total],
+    next: portfolio[(index + 1) % total],
   };
 }
