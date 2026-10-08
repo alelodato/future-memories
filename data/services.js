@@ -1,0 +1,96 @@
+// I 7 servizi, nell'ordine e con la numerazione del sito.
+// media.src: file in public/ (null = segnaposto), media.type: "photo" | "video".
+export const services = [
+  {
+    id: "foto",
+    number: "01",
+    name: "Foto",
+    title: "Fotografia di matrimonio",
+    text: "Un reportage naturale della giornata, dai preparativi alla festa, con attenzione ai dettagli e ai gesti spontanei.",
+    includes: [
+      "Preparativi, cerimonia, ricevimento",
+      "Consegna di foto post-prodotte",
+      "Album (su richiesta)",
+    ],
+    media: { type: "photo", src: null, label: null },
+  },
+  {
+    id: "video",
+    number: "02",
+    name: "Video",
+    title: "Il film del matrimonio",
+    text: "Il racconto completo del vostro giorno in stile cinematografico, montato con musica e voci reali.",
+    includes: [
+      "Un film di 10 min",
+      "Riprese dalla preparazione alla torta.",
+      "Consegna in alta qualità",
+      "Fino a 2 revisioni del montaggio incluse",
+    ],
+    media: { type: "video", src: null, label: null },
+  },
+  {
+    id: "drone",
+    number: "03",
+    name: "Drone",
+    title: "Riprese aeree",
+    text: "La location e il paesaggio visti dall’alto, per aperture e passaggi di grande respiro nel film.",
+    includes: [
+      "Riprese della location e di alcuni momenti su richiesta",
+      "Voli nel rispetto delle norme e delle zone di volo",
+      "Riprese integrate nel film e nel wedding trailer",
+    ],
+    media: { type: "video", src: null, label: null },
+  },
+  {
+    id: "wedding-trailer",
+    number: "04",
+    name: "Wedding trailer",
+    title: "Il trailer del matrimonio",
+    text: "Una sintesi emozionale di pochi minuti, perfetta da riguardare e da condividere con chi vi vuole bene.",
+    includes: [
+      "Trailer di 1.30min",
+      "Momenti salienti estratti dal film completo",
+      "Formato adatto a pc e smartphone",
+    ],
+    media: { type: "video", src: null, label: null },
+  },
+  {
+    id: "trailer-in-diretta",
+    number: "05",
+    name: "Trailer in diretta",
+    title: "Proiettato la sera stessa",
+    text: "Montiamo il trailer durante il ricevimento e lo proiettiamo subito dopo il taglio della torta: i vostri invitati rivivono la giornata insieme a voi.",
+    includes: [
+      "Trailer di 1min",
+      "Montaggio in loco durante il ricevimento",
+      "Proiettore e schermo: forniti dalla location",
+    ],
+    media: { type: "video", src: null, label: "Proiezione del trailer dopo la torta" },
+  },
+  {
+    id: "discorsi-integrali",
+    number: "06",
+    name: "Discorsi integrali",
+    title: "Ogni parola, senza tagli",
+    text: "Le promesse, le letture e i discorsi registrati per intero con una camera fissa dedicata e consegnati in un file a parte.",
+    includes: [
+      "Camera fissa dedicata",
+      "File separato dal film",
+      "Da concordare prima del matrimonio",
+    ],
+    media: { type: "video", src: null, label: null },
+  },
+  {
+    id: "reel-instagram",
+    number: "07",
+    name: "Reel per Instagram",
+    title: "Pensato per i social",
+    text: "Un video verticale breve e ritmato, pronto da pubblicare e condividere sui vostri profili.",
+    includes: [
+      "Formato verticale 9:16",
+      "Reel di 60s",
+      "Consegna a 10gg dal matrimonio",
+    ],
+    media: { type: "video", src: null, label: "Anteprima reel verticale 9:16" },
+  },
+];

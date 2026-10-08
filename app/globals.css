@@ -22,12 +22,12 @@
 
 :root {
   /* Altezza della navbar sticky: usata per compensare lo scroll alle ancore */
-  --navbar-height: 4.5rem;
+  --navbar-height: calc(4.5rem + 1px);
 }
 
 @media (min-width: 64rem) {
   :root {
-    --navbar-height: 6rem;
+    --navbar-height: calc(6rem + 1px);
   }
 }
 
