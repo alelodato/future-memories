@@ -28,7 +28,7 @@ export const site = {
   // File nella root di public/. Lasciare null finché il file non c'è:
   // al suo posto viene mostrato un riquadro segnaposto.
   media: {
-    logo: null, // es. "/logo.svg"
+    logo: "/LogoNero.png",
     showreel: null, // es. "/showreel.mp4" (orizzontale, desktop)
     showreelVertical: null, // es. "/showreel-verticale.mp4" (9:16, mobile)
     showreelPoster: null, // es. "/showreel-poster.jpg"

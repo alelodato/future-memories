@@ -15,7 +15,7 @@ export default function Logo({ size = "sm", onNavigate }) {
         <img
           src={site.media.logo}
           alt={site.name}
-          className={large ? "h-28 w-auto" : "h-11 w-auto lg:h-16"}
+          className={large ? "h-32 w-auto lg:h-36" : "h-14 w-auto lg:h-20"}
         />
       ) : (
         <span className="flex flex-col leading-none text-marrone">
