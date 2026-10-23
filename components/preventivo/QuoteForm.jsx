@@ -8,26 +8,23 @@ import { site } from "@/data/site";
 import { sendConfirmation } from "@/lib/sendConfirmation";
 import { submitToWeb3Forms } from "@/lib/web3forms";
 
-const SERVICES = ["Foto", "Video", "Foto + Video"];
-const EXTRAS = ["Drone", "Wedding trailer", "Trailer in diretta", "Discorsi integrali", "Reel per Instagram"];
-const SOURCES = ["Instagram", "Google", "Passaparola", "Altro"];
+const DATE_OPTIONS = [
+  { value: "si", label: "Ho già una data" },
+  { value: "no", label: "Non ho ancora una data" },
+];
 
 const EMPTY = {
   name: "",
   email: "",
   phone: "",
+  dateStatus: "",
   date: "",
-  location: "",
-  guests: "",
-  service: "",
-  extras: [],
-  source: "",
   message: "",
   privacy: false,
 };
 
 // Ordine dei campi obbligatori: il focus va al primo campo non valido.
-const REQUIRED_ORDER = ["name", "email", "phone", "date", "location", "service", "privacy"];
+const REQUIRED_ORDER = ["name", "email", "phone", "dateStatus", "date", "privacy"];
 
 function validate(values) {
   const errors = {};
@@ -38,11 +35,16 @@ function validate(values) {
   if (!values.phone.trim()) errors.phone = "Inserite un numero di telefono.";
   else if (values.phone.replace(/\D/g, "").length < 6)
     errors.phone = "Il numero di telefono non sembra corretto.";
-  if (!values.date.trim()) errors.date = "Indicate la data o scrivete “non ancora decisa”.";
-  if (!values.location.trim()) errors.location = "Indicate la location o la città.";
-  if (!values.service) errors.service = "Scegliete un servizio.";
+  if (!values.dateStatus) errors.dateStatus = "Indicate se avete già una data.";
+  else if (values.dateStatus === "si" && !values.date) errors.date = "Indicate la data dell’evento.";
   if (!values.privacy) errors.privacy = "Il consenso è necessario per inviare la richiesta.";
   return errors;
+}
+
+// Da aaaa-mm-gg (valore dell'input date) a gg/mm/aaaa per l'email.
+function formatDate(value) {
+  const [year, month, day] = value.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 const inputClass =
@@ -103,13 +105,14 @@ export default function QuoteForm() {
 
   const onChange = (event) => update(event.target.name, event.target.value);
 
-  const toggleExtra = (extra) => {
+  const onDateStatusChange = (event) => {
+    const value = event.target.value;
     setValues((current) => ({
       ...current,
-      extras: current.extras.includes(extra)
-        ? current.extras.filter((item) => item !== extra)
-        : [...current.extras, extra],
+      dateStatus: value,
+      date: value === "no" ? "" : current.date,
     }));
+    setErrors((current) => ({ ...current, dateStatus: undefined, date: undefined }));
   };
 
   const onSubmit = async (event) => {
@@ -134,12 +137,7 @@ export default function QuoteForm() {
       name: values.name.trim(),
       email: values.email.trim(),
       Telefono: values.phone.trim(),
-      "Data del matrimonio": values.date.trim(),
-      "Location / Città": values.location.trim(),
-      "Numero di invitati": values.guests.trim() || "-",
-      Servizio: values.service,
-      Extra: values.extras.length ? values.extras.join(", ") : "-",
-      "Come ci avete conosciuto": values.source || "-",
+      "Data dell’evento": values.dateStatus === "si" ? formatDate(values.date) : "Non ancora decisa",
       Messaggio: values.message.trim() || "-",
       "Consenso privacy": "Sì",
     });
@@ -175,87 +173,42 @@ export default function QuoteForm() {
         <TextField name="name" label="Nome e cognome" required autoComplete="name" value={values.name} onChange={onChange} error={errors.name} />
         <TextField name="email" label="Email" type="email" required autoComplete="email" value={values.email} onChange={onChange} error={errors.email} />
         <TextField name="phone" label="Telefono" type="tel" required autoComplete="tel" value={values.phone} onChange={onChange} error={errors.phone} />
-        <TextField
-          name="date"
-          label="Data del matrimonio"
-          required
-          placeholder="gg/mm/aaaa o “non ancora decisa”"
-          value={values.date}
-          onChange={onChange}
-          error={errors.date}
-        />
-        <TextField name="location" label="Location / Città" required value={values.location} onChange={onChange} error={errors.location} />
-        <TextField
-          name="guests"
-          label="Numero di invitati"
-          inputMode="numeric"
-          placeholder="indicativo"
-          value={values.guests}
-          onChange={onChange}
-        />
 
-        <fieldset aria-describedby={errors.service ? "service-errore" : undefined}>
+        <fieldset aria-describedby={errors.dateStatus ? "dateStatus-errore" : undefined}>
           <legend>
-            <Label as="span">Servizio *</Label>
+            <Label as="span">Data dell’evento *</Label>
           </legend>
           <div className="mt-3 flex flex-wrap gap-x-6 gap-y-3">
-            {SERVICES.map((service) => (
-              <label key={service} className="inline-flex cursor-pointer items-center gap-2.5">
+            {DATE_OPTIONS.map((option) => (
+              <label key={option.value} className="inline-flex cursor-pointer items-center gap-2.5">
                 <input
                   type="radio"
-                  name="service"
-                  value={service}
-                  checked={values.service === service}
-                  onChange={onChange}
+                  name="dateStatus"
+                  value={option.value}
+                  checked={values.dateStatus === option.value}
+                  onChange={onDateStatusChange}
                   className="h-5 w-5 accent-marrone"
                 />
-                {service}
+                {option.label}
               </label>
             ))}
           </div>
-          <ErrorText id="service-errore">{errors.service}</ErrorText>
+          <ErrorText id="dateStatus-errore">{errors.dateStatus}</ErrorText>
         </fieldset>
 
-        <div>
-          <label htmlFor="source">
-            <Label as="span">Come ci avete conosciuto</Label>
-          </label>
-          <select
-            id="source"
-            name="source"
-            value={values.source}
-            onChange={onChange}
-            className={`${inputClass} ${fieldBorder()} appearance-none`}
-          >
-            <option value="">Instagram · Google · Passaparola · Altro</option>
-            {SOURCES.map((source) => (
-              <option key={source} value={source}>
-                {source}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <fieldset className="lg:col-span-2">
-          <legend>
-            <Label as="span">Extra</Label>
-          </legend>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {EXTRAS.map((extra) => (
-              <label key={extra} className="inline-flex cursor-pointer items-center gap-2.5">
-                <input
-                  type="checkbox"
-                  name="extras"
-                  value={extra}
-                  checked={values.extras.includes(extra)}
-                  onChange={() => toggleExtra(extra)}
-                  className="h-5 w-5 accent-marrone"
-                />
-                {extra}
-              </label>
-            ))}
+        {values.dateStatus === "si" && (
+          <div className="lg:col-start-2">
+            <TextField
+              name="date"
+              label="Data"
+              type="date"
+              required
+              value={values.date}
+              onChange={onChange}
+              error={errors.date}
+            />
           </div>
-        </fieldset>
+        )}
 
         <div className="lg:col-span-2">
           <label htmlFor="message">
@@ -264,7 +217,7 @@ export default function QuoteForm() {
           <textarea
             id="message"
             name="message"
-            rows={4}
+            rows={5}
             value={values.message}
             onChange={onChange}
             className={`${inputClass} ${fieldBorder()} resize-y`}
