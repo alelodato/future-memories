@@ -38,31 +38,6 @@ export default function AboutUs() {
             Gloria Margarino, anni di esperienza, specializzata in fotografia e videografia.
           </p>
 
-          <Label as="h3" className="mb-5 mt-10 lg:mt-12">
-            Il team
-          </Label>
-          <ul className="space-y-5">
-            {team.map((member, index) => (
-              <li key={index} className="flex items-center gap-5">
-                {member.photo ? (
-                  <Image
-                    src={member.photo}
-                    alt={member.name}
-                    width={88}
-                    height={88}
-                    className="h-20 w-20 rounded-full object-cover lg:h-22 lg:w-22"
-                  />
-                ) : (
-                  <span className="h-20 w-20 shrink-0 rounded-full bg-beige-scuro lg:h-22 lg:w-22" aria-hidden="true" />
-                )}
-                <div>
-                  <p className="font-semibold">{member.name}</p>
-                  <p className="text-marrone-medio">{member.role}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-
           <div className="mt-10 lg:mt-14">
             <Button href="/portfolio" variant="outline" fullWidth>
               Guarda i nostri lavori
