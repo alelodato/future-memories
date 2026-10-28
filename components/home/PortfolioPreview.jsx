@@ -1,142 +1,40 @@
-"use client";
+import Link from "next/link";
+import WeddingCard from "@/components/portfolio/WeddingCard";
+import Container from "@/components/ui/Container";
+import { ArrowRightIcon } from "@/components/ui/Icons";
+import SectionTitle from "@/components/ui/SectionTitle";
+import { getWeddings } from "@/lib/portfolio";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-
-export default function Lightbox({ photos, index, label, onClose, onChange }) {
-  const touch = useRef(null);
-  const [dragY, setDragY] = useState(0);
-  const total = photos.length;
-  const photo = photos[index];
-
-  const prev = useCallback(() => onChange((index - 1 + total) % total), [index, total, onChange]);
-  const next = useCallback(() => onChange((index + 1) % total), [index, total, onChange]);
-
-  // Blocca lo scroll della pagina (regola in globals.css).
-  useEffect(() => {
-    const root = document.documentElement;
-    root.dataset.lightboxOpen = "true";
-    return () => {
-      delete root.dataset.lightboxOpen;
-    };
-  }, []);
-
-  // Tastiera: frecce ed Esc.
-  useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [onClose, prev, next]);
-
-  // Precarica le foto vicine.
-  useEffect(() => {
-    [photos[(index + 1) % total], photos[(index - 1 + total) % total]].forEach((item) => {
-      if (item) new Image().src = item.url;
-    });
-  }, [index, photos, total]);
-
-  function onTouchStart(e) {
-    const t = e.touches[0];
-    touch.current = { x: t.clientX, y: t.clientY, dx: 0, axis: null };
-  }
-
-  function onTouchMove(e) {
-    const state = touch.current;
-    if (!state) return;
-    const t = e.touches[0];
-    const dx = t.clientX - state.x;
-    const dy = t.clientY - state.y;
-    if (!state.axis && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
-      state.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
-    }
-    state.dx = dx;
-    if (state.axis === "y") setDragY(Math.max(0, dy));
-  }
-
-  function onTouchEnd() {
-    const state = touch.current;
-    touch.current = null;
-    if (state?.axis === "x" && Math.abs(state.dx) > 50) {
-      if (state.dx < 0) next();
-      else prev();
-    }
-    if (state?.axis === "y" && dragY > 120) onClose();
-    setDragY(0);
-  }
+export default async function PortfolioPreview() {
+  const weddings = (await getWeddings()).slice(0, 3);
+  if (!weddings.length) return null;
 
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Galleria: ${label}`}
-      className="fixed inset-0 z-[100] flex items-center justify-center"
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-    >
-      <div
-        className="absolute inset-0 bg-marrone"
-        style={{ opacity: Math.max(0.3, 0.97 - dragY / 400) }}
-        onClick={onClose}
-      />
-
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        key={photo.url}
-        src={photo.url}
-        alt={`${label}, foto ${index + 1} di ${total}`}
-        draggable={false}
-        className="relative max-h-[85svh] max-w-[92vw] select-none lg:max-w-[80vw]"
-        style={{
-          objectFit: "contain",
-          transform: `translateY(${dragY}px)`,
-          transition: dragY ? "none" : "transform 0.2s ease-out",
-        }}
-      />
-
-      <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 lg:px-10 lg:py-6">
-        <p className="font-sans text-xs uppercase tracking-[0.3em] text-crema">
-          {index + 1} / {total}
-        </p>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Chiudi galleria"
-          className="flex h-10 w-10 items-center justify-center text-crema transition hover:opacity-70"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
-      </div>
-
-      {total > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Foto precedente"
-            className="absolute left-4 hidden h-12 w-12 items-center justify-center text-crema transition hover:opacity-70 lg:flex"
+    <section className="bg-sabbia py-20 lg:py-32">
+      <Container>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <SectionTitle>Portfolio</SectionTitle>
+            <p className="mt-3 text-marrone-medio lg:text-lg">
+              Il vostro matrimonio raccontato in un unico flusso cinematografico
+            </p>
+          </div>
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 self-start font-sans text-xs font-semibold uppercase tracking-[0.2em] hover:underline lg:mt-4"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
-              <path d="M15 5l-7 7 7 7" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Foto successiva"
-            className="absolute right-4 hidden h-12 w-12 items-center justify-center text-crema transition hover:opacity-70 lg:flex"
-          >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
-              <path d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </>
-      )}
-    </div>
+            Vedi tutti i lavori <ArrowRightIcon />
+          </Link>
+        </div>
+
+        <ul className="relative left-1/2 mt-10 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:mt-14 lg:grid lg:w-full lg:translate-x-0 lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:px-0">
+          {weddings.map((wedding) => (
+            <li key={wedding.slug} className="w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
+              <WeddingCard wedding={wedding} />
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
   );
 }
