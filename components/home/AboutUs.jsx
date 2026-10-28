@@ -22,7 +22,7 @@ export default function AboutUs() {
             />
           </div>
         ) : (
-          <MediaPlaceholder label="Foto del team nel backstage" className="aspect-square" />
+          <MediaPlaceholder label="" className="aspect-square" />
         )}
 
         <div>
