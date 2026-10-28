@@ -7,13 +7,20 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --color-marrone: #2a1e16; /* testi, logo, pulsanti */
-  --color-marrone-medio: #5a4637; /* testi secondari */
-  --color-beige-scuro: #d9c8b2; /* fondi di foto e video */
-  --color-beige: #e2d4c1; /* fasce in evidenza */
-  --color-sabbia: #efe6da; /* sfondo principale */
-  --color-crema: #f7f2ea; /* sezioni alternate */
-  --color-errore: #8c2f1f; /* messaggi di errore dei moduli */
+  --color-marrone: #2a1e16;
+  /* testi, logo, pulsanti */
+  --color-marrone-medio: #5a4637;
+  /* testi secondari */
+  --color-beige-scuro: #d9c8b2;
+  /* fondi di foto e video */
+  --color-beige: #e2d4c1;
+  /* fasce in evidenza */
+  --color-sabbia: #efe6da;
+  /* sfondo principale */
+  --color-crema: #f7f2ea;
+  /* sezioni alternate */
+  --color-errore: #8c2f1f;
+  /* messaggi di errore dei moduli */
 
   --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-montserrat), "Montserrat", Arial, sans-serif;
@@ -57,4 +64,16 @@ body {
 /* Blocca lo scroll della pagina quando la galleria è a schermo intero */
 html[data-lightbox-open="true"] {
   overflow: hidden;
+}
+
+/* Elenco del portfolio su mobile: un matrimonio per schermata, con aggancio morbido */
+@media (max-width: 63.999rem) {
+  html:has([data-snap-stories]) {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* Scheda del matrimonio: con la barra del preventivo visibile il WhatsApp flottante si nasconde */
+html[data-quote-bar="visible"] [data-floating-whatsapp] {
+  display: none;
 }

@@ -1,119 +1,142 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
-import Image from "next/image";
-import MediaPlaceholder from "@/components/ui/MediaPlaceholder";
-import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from "@/components/ui/Icons";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-/** Visualizzazione a schermo intero della galleria, con tastiera e swipe. */
-export default function Lightbox({ photos, index, onClose, onChange }) {
-  const closeRef = useRef(null);
-  const touchStart = useRef(null);
-  const photo = photos[index];
+export default function Lightbox({ photos, index, label, onClose, onChange }) {
+  const touch = useRef(null);
+  const [dragY, setDragY] = useState(0);
   const total = photos.length;
+  const photo = photos[index];
 
-  const previous = () => onChange((index - 1 + total) % total);
-  const next = () => onChange((index + 1) % total);
+  const prev = useCallback(() => onChange((index - 1 + total) % total), [index, total, onChange]);
+  const next = useCallback(() => onChange((index + 1) % total), [index, total, onChange]);
 
-  useLayoutEffect(() => {
-    document.documentElement.dataset.lightboxOpen = "true";
-    closeRef.current?.focus();
+  // Blocca lo scroll della pagina (regola in globals.css).
+  useEffect(() => {
+    const root = document.documentElement;
+    root.dataset.lightboxOpen = "true";
     return () => {
-      delete document.documentElement.dataset.lightboxOpen;
+      delete root.dataset.lightboxOpen;
     };
   }, []);
 
+  // Tastiera: frecce ed Esc.
   useEffect(() => {
-    const onKey = (event) => {
-      if (event.key === "Escape") onClose();
-      if (event.key === "ArrowLeft") onChange((index - 1 + total) % total);
-      if (event.key === "ArrowRight") onChange((index + 1) % total);
-    };
+    function onKey(e) {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [index, total, onClose, onChange]);
+  }, [onClose, prev, next]);
 
-  const onTouchStart = (event) => {
-    touchStart.current = event.touches[0].clientX;
-  };
-  const onTouchEnd = (event) => {
-    if (touchStart.current === null) return;
-    const delta = event.changedTouches[0].clientX - touchStart.current;
-    if (delta > 50) previous();
-    if (delta < -50) next();
-    touchStart.current = null;
-  };
+  // Precarica le foto vicine.
+  useEffect(() => {
+    [photos[(index + 1) % total], photos[(index - 1 + total) % total]].forEach((item) => {
+      if (item) new Image().src = item.url;
+    });
+  }, [index, photos, total]);
 
-  const isPortrait = photo.orientation === "portrait";
+  function onTouchStart(e) {
+    const t = e.touches[0];
+    touch.current = { x: t.clientX, y: t.clientY, dx: 0, axis: null };
+  }
+
+  function onTouchMove(e) {
+    const state = touch.current;
+    if (!state) return;
+    const t = e.touches[0];
+    const dx = t.clientX - state.x;
+    const dy = t.clientY - state.y;
+    if (!state.axis && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
+      state.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+    state.dx = dx;
+    if (state.axis === "y") setDragY(Math.max(0, dy));
+  }
+
+  function onTouchEnd() {
+    const state = touch.current;
+    touch.current = null;
+    if (state?.axis === "x" && Math.abs(state.dx) > 50) {
+      if (state.dx < 0) next();
+      else prev();
+    }
+    if (state?.axis === "y" && dragY > 120) onClose();
+    setDragY(0);
+  }
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Galleria fotografica, foto ${index + 1} di ${total}`}
-      className="fixed inset-0 z-50 flex flex-col bg-marrone text-crema"
+      aria-label={`Galleria: ${label}`}
+      className="fixed inset-0 z-[100] flex items-center justify-center"
       onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <div className="flex items-center justify-between px-4 py-3 lg:px-8 lg:py-5">
-        <p className="font-sans text-xs uppercase tracking-[0.2em]" aria-live="polite">
+      <div
+        className="absolute inset-0 bg-marrone"
+        style={{ opacity: Math.max(0.3, 0.97 - dragY / 400) }}
+        onClick={onClose}
+      />
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        key={photo.url}
+        src={photo.url}
+        alt={`${label}, foto ${index + 1} di ${total}`}
+        draggable={false}
+        className="relative max-h-[85svh] max-w-[92vw] select-none lg:max-w-[80vw]"
+        style={{
+          objectFit: "contain",
+          transform: `translateY(${dragY}px)`,
+          transition: dragY ? "none" : "transform 0.2s ease-out",
+        }}
+      />
+
+      <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 lg:px-10 lg:py-6">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-crema">
           {index + 1} / {total}
         </p>
         <button
-          ref={closeRef}
           type="button"
           onClick={onClose}
-          aria-label="Chiudi la galleria"
-          className="-mr-2 p-2 hover:text-beige-scuro"
+          aria-label="Chiudi galleria"
+          className="flex h-10 w-10 items-center justify-center text-crema transition hover:opacity-70"
         >
-          <CloseIcon className="h-7 w-7" />
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
         </button>
       </div>
 
-      <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 pb-4 lg:px-24 lg:pb-10">
-        {photo.src ? (
-          <div className="relative h-full w-full">
-            <Image src={photo.src} alt={photo.alt} fill sizes="100vw" className="object-contain" priority />
-          </div>
-        ) : (
-          // Riquadro che si adatta allo spazio disponibile mantenendo le proporzioni
-          <div className="flex h-full w-full items-center justify-center" style={{ containerType: "size" }}>
-            <MediaPlaceholder
-              label={photo.alt}
-              style={{
-                aspectRatio: isPortrait ? "2 / 3" : "3 / 2",
-                width: isPortrait ? "min(100cqw, calc(100cqh * 2 / 3))" : "min(100cqw, 64rem, calc(100cqh * 3 / 2))",
-              }}
-            />
-          </div>
-        )}
-
-        <button
-          type="button"
-          onClick={previous}
-          aria-label="Foto precedente"
-          className="absolute left-2 top-1/2 hidden -translate-y-1/2 p-3 hover:text-beige-scuro lg:block"
-        >
-          <ArrowLeftIcon className="h-6 w-6" />
-        </button>
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Foto successiva"
-          className="absolute right-2 top-1/2 hidden -translate-y-1/2 p-3 hover:text-beige-scuro lg:block"
-        >
-          <ArrowRightIcon className="h-6 w-6" />
-        </button>
-      </div>
-
-      <div className="flex justify-between px-4 pb-6 lg:hidden">
-        <button type="button" onClick={previous} aria-label="Foto precedente" className="p-3">
-          <ArrowLeftIcon className="h-5 w-5" />
-        </button>
-        <button type="button" onClick={next} aria-label="Foto successiva" className="p-3">
-          <ArrowRightIcon className="h-5 w-5" />
-        </button>
-      </div>
+      {total > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Foto precedente"
+            className="absolute left-4 hidden h-12 w-12 items-center justify-center text-crema transition hover:opacity-70 lg:flex"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
+              <path d="M15 5l-7 7 7 7" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Foto successiva"
+            className="absolute right-4 hidden h-12 w-12 items-center justify-center text-crema transition hover:opacity-70 lg:flex"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
+              <path d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
     </div>
   );
 }
