@@ -1,5 +1,5 @@
 import { revalidateTag } from "next/cache";
-import { PORTFOLIO_TAG } from "@/lib/portfolio";
+import { PORTFOLIO_TAG } from "@/lib/portfolio-tag";
 
 // Chiamata dal gestionale dopo ogni salvataggio per svuotare la cache del portfolio.
 export async function POST(request) {
