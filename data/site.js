@@ -22,7 +22,7 @@ export const site = {
   },
   instagramPersonal: {
     handle: "@gloriamargarino_",
-    href: "https://www.instagram.com/gloriamargarino_/",
+    href: "https://www.instagram.com/gloria.margarino_/",
   },
 
   // File nella root di public/. Lasciare null finché il file non c'è:
