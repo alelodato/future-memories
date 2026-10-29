@@ -12,13 +12,13 @@ export default function AboutUs() {
     <section id="chi-siamo" className="bg-crema py-20 lg:py-32">
       <Container className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
         {site.media.aboutPhoto ? (
-          <div className="relative aspect-square overflow-hidden bg-beige-scuro">
+          <div className="relative aspect-[4/5] overflow-hidden bg-beige-scuro lg:aspect-square">
             <Image
               src={site.media.aboutPhoto}
               alt="Il team Future Memories nel backstage"
               fill
               sizes="(min-width: 64rem) 50vw, 100vw"
-              className="object-cover"
+              className="object-cover object-[50%_15%]"
             />
           </div>
         ) : (
