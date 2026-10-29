@@ -32,10 +32,10 @@ export default function Hero() {
           Wedding film &amp; photography
         </Label>
         <h1 className="font-serif text-5xl leading-[1.05] text-balance lg:text-8xl">
-          Raccontiamo il vostro giorno in chiave <em>cinematografica</em>
+          Il vostro matrimonio, autentico come l’avete vissuto, emozionale come un <em>film</em>
         </h1>
         <p className="mt-5 text-base lg:mt-6 lg:text-xl">
-          Un ricordo indelebile strutturato ad hoc per voi
+          Un ricordo indelebile, pensato su misura per voi.
         </p>
         <div className="mt-8 flex flex-col gap-3 lg:mt-12 lg:flex-row lg:justify-center lg:gap-5">
           <Button href="/portfolio" fullWidth>

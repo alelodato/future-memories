@@ -25,7 +25,7 @@ export default function ServiceBlock({ service, index }) {
 
         <div>
           <Label className="mb-5">
-            Servizio {service.number} · {service.name}
+            {service.label ?? `Servizio ${service.number} · ${service.name}`}
           </Label>
           <h2 id={`${service.id}-titolo`} className="font-serif text-4xl leading-tight text-balance lg:text-6xl">
             {service.title}

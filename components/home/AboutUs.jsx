@@ -35,7 +35,7 @@ export default function AboutUs() {
             La nostra storia
           </Label>
           <p className="leading-relaxed lg:text-lg">
-            Gloria Margarino, anni di esperienza, specializzata in fotografia e videografia.
+            Oltre 10 anni di esperienza, un’unica squadra per foto e video e un solo obiettivo: restituirvi il vostro giorno così come l’avete vissuto, attraverso un reportage autentico e cinematografico.
           </p>
 
           <div className="mt-10 lg:mt-14">

@@ -3,7 +3,7 @@ import ServicesGrid from "@/components/servizi/ServicesGrid";
 import Container from "@/components/ui/Container";
 import FinalBand from "@/components/ui/FinalBand";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { services } from "@/data/services";
+import { anniversary, services } from "@/data/services";
 
 export const metadata = {
   title: "Servizi",
@@ -34,6 +34,8 @@ export default function ServiziPage() {
       {services.map((service, index) => (
         <ServiceBlock key={service.id} service={service} index={index} />
       ))}
+
+      <ServiceBlock service={anniversary} index={services.length} />
 
       <FinalBand
         label="Un preventivo su misura"
