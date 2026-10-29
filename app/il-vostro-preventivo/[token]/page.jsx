@@ -6,6 +6,9 @@ import Container from "@/components/ui/Container";
 import { site } from "@/data/site";
 import { getQuoteByToken } from "@/lib/quote/quotes";
 
+// Pagina privata generata solo all'apertura del link: nessun guscio pre-generato in fase di build.
+export const instant = false;
+
 export const metadata = {
     title: "Il vostro preventivo",
     robots: { index: false, follow: false },
