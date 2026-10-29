@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { PlayIcon } from "@/components/ui/Icons";
 import MediaPlaceholder from "@/components/ui/MediaPlaceholder";
 
 /** Foto o video di un servizio, oppure il segnaposto se il file manca. */
@@ -10,11 +9,6 @@ export default function ServiceMedia({ service, tone = "dark", className = "", s
     return (
       <div className={`relative overflow-hidden bg-beige-scuro ${className}`}>
         <Image src={image} alt={service.title} fill sizes={sizes} className="object-cover" />
-        {type === "video" && (
-          <span className="absolute inset-0 flex items-center justify-center text-crema drop-shadow-md">
-            <PlayIcon className="h-14 w-14 lg:h-20 lg:w-20" />
-          </span>
-        )}
       </div>
     );
   }
