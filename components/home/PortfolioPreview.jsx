@@ -3,10 +3,10 @@ import WeddingCard from "@/components/portfolio/WeddingCard";
 import Container from "@/components/ui/Container";
 import { ArrowRightIcon } from "@/components/ui/Icons";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { getWeddings } from "@/lib/portfolio";
+import { getVideoWorks } from "@/lib/portfolio";
 
 export default async function PortfolioPreview() {
-  const weddings = (await getWeddings()).slice(0, 3);
+  const weddings = (await getVideoWorks()).slice(0, 3);
   if (!weddings.length) return null;
 
   return (
@@ -15,9 +15,7 @@ export default async function PortfolioPreview() {
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <SectionTitle>Portfolio</SectionTitle>
-            <p className="mt-3 text-marrone-medio lg:text-lg">
-              Il vostro matrimonio raccontato in un unico flusso cinematografico
-            </p>
+            <p className="mt-3 text-marrone-medio lg:text-lg">Le storie di chi ci ha scelto.</p>
           </div>
           <Link
             href="/portfolio"
