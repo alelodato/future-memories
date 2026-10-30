@@ -4,13 +4,13 @@ import { anniversary } from "@/data/services";
 
 /**
  * Schede dei servizi della pagina Servizi: carosello su mobile e tablet, griglia di 3 colonne da lg.
- * In fondo la scheda dell'Anniversario, senza numero: da lg occupa tutta la riga.
+ * In fondo la scheda dell'Anniversario, senza numero: da lg occupa tutta la riga, alta quanto le altre (righe uguali).
  */
 export default function ServicesCards({ services }) {
   return (
     <ul
       data-reveal="fade"
-      className="relative left-1/2 -my-4 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:grid lg:w-full lg:translate-x-0 lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0"
+      className="relative left-1/2 -my-4 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:grid lg:w-full lg:translate-x-0 lg:auto-rows-fr lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0"
     >
       {services.map((service) => (
         <li key={service.id} className="w-[75%] shrink-0 snap-start sm:w-[40%] lg:w-auto">
@@ -39,7 +39,7 @@ export default function ServicesCards({ services }) {
       ))}
 
       <li className="w-[75%] shrink-0 snap-start sm:w-[40%] lg:col-span-3 lg:w-auto">
-        <a href={`#${anniversary.id}`} className="hover-lift group relative block aspect-[4/5] overflow-hidden bg-beige-scuro lg:aspect-[4/1]">
+        <a href={`#${anniversary.id}`} className="hover-lift group relative block aspect-[4/5] overflow-hidden bg-beige-scuro lg:aspect-auto lg:h-full">
           {anniversary.media.image ? (
             <Image
               src={anniversary.media.image}
