@@ -29,9 +29,9 @@ export const site = {
   // al suo posto viene mostrato un riquadro segnaposto.
   media: {
     logo: "/LogoNero.png",
-    showreel: null, // es. "/showreel.mp4" (orizzontale, desktop)
+    showreel: "/showreel-desktop.mp4", // es. "/showreel.mp4" (orizzontale, desktop)
     showreelVertical: null, // es. "/showreel-verticale.mp4" (9:16, mobile)
-    showreelPoster: null, // es. "/showreel-poster.jpg"
+    showreelPoster: "/showreel-desktop.mp4", // es. "/showreel-poster.jpg"
     aboutPhoto: "/chi-siamo.jpg",
   },
 };
