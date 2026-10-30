@@ -5,8 +5,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Label from "@/components/ui/Label";
 import { site } from "@/data/site";
-import { sendConfirmation } from "@/lib/sendConfirmation";
-import { submitToWeb3Forms } from "@/lib/web3forms";
+import { submitContact } from "@/lib/contact/actions";
 
 const DATE_OPTIONS = [
   { value: "si", label: "Ho già una data" },
@@ -39,12 +38,6 @@ function validate(values) {
   else if (values.dateStatus === "si" && !values.date) errors.date = "Indicate la data dell’evento.";
   if (!values.privacy) errors.privacy = "Il consenso è necessario per inviare la richiesta.";
   return errors;
-}
-
-// Da aaaa-mm-gg (valore dell'input date) a gg/mm/aaaa per l'email.
-function formatDate(value) {
-  const [year, month, day] = value.split("-");
-  return `${day}/${month}/${year}`;
 }
 
 const inputClass =
@@ -127,26 +120,19 @@ export default function QuoteForm() {
       return;
     }
 
-    // Campo esca anti-spam: se compilato, la richiesta viene ignorata.
-    if (formRef.current?.elements.botcheck?.checked) return;
+    // Campo esca anti-spam: viene controllato sul server.
+    const botcheck = formRef.current?.elements.botcheck?.checked || false;
 
     setStatus("sending");
-    const result = await submitToWeb3Forms({
-      subject: `Richiesta di preventivo da ${values.name.trim()}`,
-      from_name: `Sito ${site.name}`,
-      name: values.name.trim(),
-      email: values.email.trim(),
-      Telefono: values.phone.trim(),
-      "Data dell’evento": values.dateStatus === "si" ? formatDate(values.date) : "Non ancora decisa",
-      Messaggio: values.message.trim() || "-",
-      "Consenso privacy": "Sì",
-    });
-
-    if (result.ok) {
-      await sendConfirmation(values);
-      setStatus("success");
-      setValues(EMPTY);
-    } else {
+    try {
+      const result = await submitContact({ ...values, botcheck });
+      if (result.ok) {
+        setStatus("success");
+        setValues(EMPTY);
+      } else {
+        setStatus("error");
+      }
+    } catch {
       setStatus("error");
     }
   };
@@ -247,7 +233,7 @@ export default function QuoteForm() {
           <ErrorText id="privacy-errore">{errors.privacy}</ErrorText>
         </div>
 
-        {/* Campo esca anti-spam di Web3Forms, nascosto agli utenti */}
+        {/* Campo esca anti-spam, nascosto agli utenti */}
         <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       </div>
 
