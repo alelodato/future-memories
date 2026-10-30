@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const numberFormat = new Intl.NumberFormat("it-IT");
+// Separatore delle migliaia scritto a mano: Intl può dare risultati
+// diversi tra server e browser e causare errori di idratazione.
+function formatCount(value) {
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 function VideoIcon() {
   return (
@@ -115,13 +119,13 @@ function PostCard({ post, profile }) {
             {post.likes !== null && (
               <span className="inline-flex items-center gap-1.5">
                 <HeartIcon />
-                {numberFormat.format(post.likes)}
+                {formatCount(post.likes)}
               </span>
             )}
             {post.comments !== null && (
               <span className="inline-flex items-center gap-1.5">
                 <CommentIcon />
-                {numberFormat.format(post.comments)}
+                {formatCount(post.comments)}
               </span>
             )}
           </div>
