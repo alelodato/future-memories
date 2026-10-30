@@ -8,7 +8,14 @@ export default function ServiceMedia({ service, tone = "dark", className = "", s
   if (!src && image) {
     return (
       <div className={`relative overflow-hidden bg-beige-scuro ${className}`}>
-        <Image src={image} alt={service.title} fill sizes={sizes} className="object-cover" />
+        <Image
+          src={image}
+          alt={service.title}
+          fill
+          sizes={sizes}
+          className="object-cover"
+          style={{ objectPosition: service.imagePosition ?? "50% 50%" }}
+        />
       </div>
     );
   }

@@ -3,7 +3,7 @@ export const phases = [
   {
     number: "01",
     title: "Primo incontro",
-    text: "Ci conosciamo, di persona o in videochiamata: data, location, desideri.",
+    text: "Ci conosciamo, di persona o in videochiamata e definiamo: data, location, desideri.",
   },
   {
     number: "02",

@@ -1,6 +1,7 @@
 // Gli 8 servizi di matrimonio, nell'ordine e con la numerazione del sito.
 // media.type: "photo" | "video"; media.image: foto in public/ (null = segnaposto);
 // media.src: eventuale video in public/ (null = nessun video).
+// imagePosition: parte della foto da tenere inquadrata (objectPosition), "50% 50%" = centrata.
 export const services = [
   {
     id: "video",
@@ -9,11 +10,12 @@ export const services = [
     title: "Il vostro film",
     text: "Il racconto completo del vostro giorno.",
     includes: [
-      "Un film di 10 min",
+      "Un film di 10 minuti",
       "Riprese dai preparativi alla torta",
       "Consegna in alta qualità",
     ],
-    media: { type: "video", src: null, image: null, label: null },
+    imagePosition: "50% 50%",
+    media: { type: "video", src: null, image: "/servizio-video.jpg", label: null },
   },
   {
     id: "drone",
@@ -26,6 +28,7 @@ export const services = [
       "Voli autorizzati, nel rispetto delle normative delle zone di volo",
       "Riprese integrate nel film e nel wedding trailer",
     ],
+    imagePosition: "50% 50%",
     media: { type: "video", src: null, image: "/servizio-drone.jpg", label: null },
   },
   {
@@ -35,10 +38,11 @@ export const services = [
     title: "Il trailer del matrimonio",
     text: "Le emozioni più belle in pochi minuti.",
     includes: [
-      "Trailer di 1.30min",
+      "Trailer di 1'30''",
       "Momenti estratti dal film completo, con l'aggiunta di riprese inedite",
       "Formato adatto a pc e smartphone",
     ],
+    imagePosition: "40% 50%",
     media: { type: "video", src: null, image: "/servizio-wedding-trailer.jpg", label: null },
   },
   {
@@ -53,6 +57,7 @@ export const services = [
       "20 foto post-prodotte consegnate la sera stessa, da condividere subito sui vostri social",
       "Album (su richiesta)",
     ],
+    imagePosition: "50% 25%",
     media: { type: "photo", src: null, image: "/servizio-foto.jpg", label: null },
   },
   {
@@ -62,10 +67,11 @@ export const services = [
     title: "Video live",
     text: "Un breve trailer emozionale, montato in diretta durante il matrimonio e proiettato subito dopo la torta: i vostri invitati rivivono la giornata insieme a voi.",
     includes: [
-      "Trailer di 1min",
+      "Trailer di 1 minuto",
       "Montaggio in loco durante il ricevimento",
       "Proiettore e schermo forniti dalla location",
     ],
+    imagePosition: "0% 50%",
     media: {
       type: "video",
       src: null,
@@ -84,33 +90,36 @@ export const services = [
       "Un unico file, separato dal film",
       "Da concordare prima del matrimonio",
     ],
-    media: { type: "video", src: null, image: null, label: null },
+    imagePosition: "50% 50%",
+    media: { type: "video", src: null, image: "/servizio-discorsi-integrali.jpg", label: null },
   },
   {
     id: "videoclip",
     number: "07",
     name: "Videoclip",
     title: "La vostra canzone",
-    text: "Un videoclip sulla canzone scelta da voi, cantata da sposi e invitati e proiettata dopo la torta.",
+    text: "Un videoclip su una canzone scelta da voi, cantata da sposi e invitati e proiettata dopo la torta.",
     includes: [
       "Brano scelto dagli sposi",
       "Riprese di sposi e invitati durante la festa che cantano sulle note del brano",
       "Montaggio in giornata, pronto per la proiezione",
     ],
+    imagePosition: "42% 50%",
     media: { type: "video", src: null, image: "/servizio-videoclip.jpg", label: null },
   },
   {
     id: "reel-instagram",
     number: "08",
-    name: "Reel per Instagram",
+    name: "Reel Social",
     title: "Pensato per i social",
     text: "Un reel breve e ritmato, pronto da pubblicare e condividere sui vostri profili.",
     includes: [
       "Export finale in formato verticale 9:16 e ottimizzato per i social",
-      "Reel di 60s",
+      "Reel di 60 secondi",
       "Consegna entro 10 giorni dal matrimonio",
     ],
-    media: { type: "video", src: null, image: null, label: "Anteprima reel verticale 9:16" },
+    imagePosition: "50% 50%",
+    media: { type: "video", src: null, image: "/servizio-reel.jpg", label: null },
   },
 ];
 
@@ -121,8 +130,9 @@ export const anniversary = {
   title: "Ancora sì, dopo tanti anni",
   text: "25 o 50 anni insieme meritano di essere raccontati come il primo giorno: foto e video del vostro anniversario, con lo stesso sguardo autentico e cinematografico.",
   includes: [
-    "Nozze d’argento (25 anni) e d’oro (50 anni)",
+    "Nozze d’argento e d’oro",
     "Foto, video o entrambi, in base alle vostre richieste",
   ],
+  imagePosition: "50% 50%",
   media: { type: "photo", src: null, image: "/anniversario.jpg", label: null },
 };
