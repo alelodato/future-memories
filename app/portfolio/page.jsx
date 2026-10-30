@@ -8,7 +8,9 @@ import { getWeddings } from "@/lib/portfolio";
 
 export const metadata = {
   title: "Portfolio",
-  description: "Le storie di chi ci ha scelto.",
+  description:
+    "Wedding film e reportage fotografici di matrimoni e anniversari in tutta Italia: guardate le storie di chi ci ha scelto e immaginate il vostro racconto.",
+  alternates: { canonical: "/portfolio" },
 };
 
 const PHOTO_GROUPS = [

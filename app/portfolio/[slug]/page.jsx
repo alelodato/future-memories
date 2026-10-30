@@ -24,8 +24,12 @@ export async function generateMetadata({ params }) {
   const { wedding } = result;
   return {
     title: `${wedding.couple} · ${wedding.typeLabel}`,
-    description: `${wedding.couple} · ${wedding.location} · ${wedding.date}`,
-    openGraph: wedding.cover ? { images: [wedding.cover] } : undefined,
+    description: `${wedding.typeLabel} di ${wedding.couple} · ${wedding.location}, ${wedding.date.toLowerCase()}. Un racconto firmato Future Memories, foto e video in tutta Italia.`,
+    alternates: { canonical: `/portfolio/${slug}` },
+    // Senza copertina la chiave manca del tutto, così la scheda eredita l'Open Graph del layout.
+    ...(wedding.cover && {
+      openGraph: { type: "website", locale: "it_IT", siteName: "Future Memories", images: [wedding.cover] },
+    }),
   };
 }
 

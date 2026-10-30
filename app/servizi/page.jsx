@@ -8,7 +8,8 @@ import { anniversary, services } from "@/data/services";
 export const metadata = {
   title: "Servizi",
   description:
-    "Foto e video del vostro matrimonio, più tutto ciò che serve per raccontarlo e condividerlo.",
+    "Foto, video, drone, wedding trailer, video live, videoclip e reel social per il vostro matrimonio, in tutta Italia: scegliete come rivivere il vostro giorno.",
+  alternates: { canonical: "/servizi" },
 };
 
 export default function ServiziPage() {

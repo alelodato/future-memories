@@ -6,7 +6,9 @@ import { site } from "@/data/site";
 
 export const metadata = {
   title: "Contatti",
-  description: `Scriveteci, vi rispondiamo entro ${site.responseTime}.`,
+  description:
+    "Contattate Future Memories per foto e video del vostro matrimonio in tutta Italia: email, telefono, WhatsApp e Instagram. Vi rispondiamo entro 24 ore.",
+  alternates: { canonical: "/contatti" },
 };
 
 const contacts = [

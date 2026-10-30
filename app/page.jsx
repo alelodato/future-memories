@@ -7,6 +7,12 @@ import Phases from "@/components/home/Phases";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
 import FinalBand from "@/components/ui/FinalBand";
 
+export const metadata = {
+  description:
+    "Fotografia e video di matrimonio in tutta Italia: wedding film cinematografici e reportage autentici per raccontare il vostro giorno così come l’avete vissuto.",
+  alternates: { canonical: "/" },
+};
+
 export default function HomePage() {
   return (
     <>

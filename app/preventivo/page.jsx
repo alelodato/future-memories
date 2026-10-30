@@ -6,7 +6,9 @@ import { site } from "@/data/site";
 
 export const metadata = {
   title: "Richiedi un preventivo",
-  description: "Raccontateci il vostro giorno, vi prepariamo una proposta su misura.",
+  description:
+    "Richiedete un preventivo per foto e video del vostro matrimonio in tutta Italia: raccontateci il vostro giorno e vi prepariamo una proposta su misura.",
+  alternates: { canonical: "/preventivo" },
 };
 
 function DirectContact({ className }) {

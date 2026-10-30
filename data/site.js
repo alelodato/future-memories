@@ -5,6 +5,7 @@ const phoneDigits = "393931395785";
 
 export const site = {
   name: "Future Memories",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.futurememories.it",
   tagline: "Photo & Video",
   description: "Fotografia e video di matrimonio. Wedding film & photography.",
 
