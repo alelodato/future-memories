@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -5,8 +6,20 @@ import { phases } from "@/data/phases";
 
 export default function Phases() {
   return (
-    <section id="come-lavoriamo" className="bg-crema py-20 lg:py-32">
-      <Container>
+    <section id="come-lavoriamo" className="relative overflow-hidden bg-crema py-20 lg:py-32">
+      {/* Sfondo: foto quasi in bianco e nero sotto un velo crema, percepita come una texture leggera */}
+      <Image
+        src="/come-lavoriamo.jpg"
+        alt=""
+        aria-hidden="true"
+        fill
+        sizes="100vw"
+        className="object-cover object-center"
+        style={{ filter: "grayscale(90%)" }}
+      />
+      <div className="absolute inset-0 bg-crema/85" aria-hidden="true" />
+
+      <Container className="relative">
         <SectionTitle label="Come lavoriamo">
           Sei fasi, dal primo incontro alla <em>consegna</em>
         </SectionTitle>
