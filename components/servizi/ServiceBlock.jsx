@@ -14,7 +14,7 @@ export default function ServiceBlock({ service, index }) {
       className={index % 2 === 0 ? "bg-crema py-16 lg:py-28" : "bg-sabbia py-16 lg:py-28"}
     >
       <Container className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-20">
-        <div className={imageFirst ? "lg:order-first" : "lg:order-last"}>
+        <div data-reveal="image" className={imageFirst ? "lg:order-first" : "lg:order-last"}>
           <ServiceMedia
             service={service}
             tone={imageFirst ? "light" : "dark"}
@@ -23,7 +23,7 @@ export default function ServiceBlock({ service, index }) {
           />
         </div>
 
-        <div>
+        <div data-reveal>
           <Label className="mb-5">
             {service.label ?? `Servizio ${service.number} · ${service.name}`}
           </Label>

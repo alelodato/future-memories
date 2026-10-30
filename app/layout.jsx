@@ -1,6 +1,8 @@
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import Script from "next/script";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import RevealObserver from "@/components/layout/RevealObserver";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import WhatsAppFloating from "@/components/layout/WhatsAppFloating";
 import { site } from "@/data/site";
@@ -61,9 +63,13 @@ export default function RootLayout({ children }) {
     <html
       lang="it"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={`${cormorant.variable} ${montserrat.variable} antialiased`}
     >
       <body className="flex min-h-screen flex-col bg-sabbia text-marrone">
+        <Script id="reveal-init" strategy="beforeInteractive">
+          {`(function(){var d=document.documentElement;if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('reveal-on');setTimeout(function(){if(!d.classList.contains('reveal-ready'))d.classList.remove('reveal-on');},3000);})();`}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
@@ -80,6 +86,7 @@ export default function RootLayout({ children }) {
         </main>
         <Footer />
         <WhatsAppFloating />
+        <RevealObserver />
         <ScrollToTop />
       </body>
     </html>

@@ -11,7 +11,7 @@ export default async function InstagramFeed() {
   return (
     <section aria-label="Instagram" className="bg-crema py-20 lg:py-28">
       <Container>
-        <div className="text-center">
+        <div data-reveal className="text-center">
           <Label as="h2">Seguici su Instagram</Label>
           <a
             href={site.instagram.href}
@@ -24,7 +24,7 @@ export default async function InstagramFeed() {
         </div>
 
         {posts.length ? (
-          <div className="mt-10 lg:mt-14">
+          <div data-reveal="fade" className="mt-10 lg:mt-14">
             <InstagramCarousel posts={posts} profile={profile} />
           </div>
         ) : (

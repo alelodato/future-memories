@@ -36,7 +36,7 @@ export default function PortfolioTabs({ video, foto }) {
   return (
     <>
       <Container>
-        <div role="tablist" aria-label="Tipo di lavori" className="mt-8 inline-flex border border-marrone lg:mt-10">
+        <div role="tablist" aria-label="Tipo di lavori" data-reveal="fade" style={{ "--reveal-delay": "240ms" }} className="mt-8 inline-flex border border-marrone lg:mt-10">
           {TABS.map((tab) => {
             const selected = active === tab.id;
             return (

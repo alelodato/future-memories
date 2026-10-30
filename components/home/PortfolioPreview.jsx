@@ -12,7 +12,7 @@ export default async function PortfolioPreview() {
   return (
     <section className="bg-sabbia py-20 lg:py-32">
       <Container>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+        <div data-reveal className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <SectionTitle>Portfolio</SectionTitle>
             <p className="mt-3 text-marrone-medio lg:text-lg">Le storie di chi ci ha scelto.</p>
@@ -25,7 +25,10 @@ export default async function PortfolioPreview() {
           </Link>
         </div>
 
-        <ul className="relative left-1/2 mt-10 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:mt-14 lg:grid lg:w-full lg:translate-x-0 lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:px-0">
+        <ul
+          data-reveal="fade"
+          className="relative left-1/2 -mb-4 mt-6 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:mt-10 lg:grid lg:w-full lg:translate-x-0 lg:grid-cols-3 lg:gap-8 lg:overflow-visible lg:px-0"
+        >
           {weddings.map((wedding) => (
             <li key={wedding.slug} className="w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
               <WeddingCard wedding={wedding} />

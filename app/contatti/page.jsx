@@ -22,7 +22,7 @@ export default function ContattiPage() {
   return (
     <section className="bg-crema py-14 lg:py-24">
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-7">
+        <div data-reveal className="lg:col-span-7">
           <SectionTitle as="h1" size="xl">
             Contatti
           </SectionTitle>
@@ -55,7 +55,7 @@ export default function ContattiPage() {
           </dl>
         </div>
 
-        <aside className="flex flex-col justify-center bg-beige p-8 lg:col-span-5 lg:p-10">
+        <aside data-reveal style={{ "--reveal-delay": "120ms" }} className="flex flex-col justify-center bg-beige p-8 lg:col-span-5 lg:p-10">
           <h2 className="font-serif text-3xl leading-tight text-balance lg:text-5xl">
             Pronti a raccontare il <em>vostro giorno</em>?
           </h2>

@@ -4,7 +4,7 @@ import TeaserVideo from "@/components/portfolio/TeaserVideo";
 
 export default function WeddingCard({ wedding, headingLevel: Heading = "h3" }) {
   return (
-    <Link href={`/portfolio/${wedding.slug}`} className="group block">
+    <Link href={`/portfolio/${wedding.slug}`} className="hover-lift group block">
       <div className="relative aspect-[9/16] overflow-hidden bg-beige-scuro lg:aspect-[4/5]">
         <TeaserVideo
           src={wedding.teaser}

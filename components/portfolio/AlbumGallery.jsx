@@ -33,6 +33,7 @@ function PhotoButton({ photo, index, label, onOpen }) {
       type="button"
       onClick={() => onOpen(index)}
       aria-label={`Apri la foto ${index + 1} a schermo intero`}
+      data-reveal="fade"
       className="group block w-full cursor-zoom-in overflow-hidden bg-beige-scuro"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
