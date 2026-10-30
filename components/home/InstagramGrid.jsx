@@ -3,10 +3,10 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Label from "@/components/ui/Label";
 import { site } from "@/data/site";
-import { getInstagramPosts } from "@/lib/instagram";
+import { getInstagramFeed } from "@/lib/instagram";
 
 export default async function InstagramFeed() {
-  const posts = await getInstagramPosts(12);
+  const { profile, posts } = await getInstagramFeed(12);
 
   return (
     <section aria-label="Instagram" className="bg-crema py-20 lg:py-28">
@@ -25,7 +25,7 @@ export default async function InstagramFeed() {
 
         {posts.length ? (
           <div className="mt-10 lg:mt-14">
-            <InstagramCarousel posts={posts} />
+            <InstagramCarousel posts={posts} profile={profile} />
           </div>
         ) : (
           <ul className="mt-10 grid grid-cols-3 gap-1 lg:mt-14 lg:grid-cols-6 lg:gap-3">
