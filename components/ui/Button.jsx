@@ -6,6 +6,7 @@ const base =
 const variants = {
   solid: "border-marrone bg-marrone text-crema hover:border-marrone-medio hover:bg-marrone-medio",
   outline: "border-marrone bg-transparent text-marrone hover:bg-marrone hover:text-crema",
+  light: "border-crema bg-transparent text-crema hover:bg-crema hover:text-marrone",
 };
 
 /**
