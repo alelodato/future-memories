@@ -1,6 +1,7 @@
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 import WhatsAppFloating from "@/components/layout/WhatsAppFloating";
 import { site } from "@/data/site";
 import "./globals.css";
@@ -79,6 +80,7 @@ export default function RootLayout({ children }) {
         </main>
         <Footer />
         <WhatsAppFloating />
+        <ScrollToTop />
       </body>
     </html>
   );

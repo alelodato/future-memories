@@ -78,3 +78,8 @@ html[data-lightbox-open="true"] {
 html[data-quote-bar="visible"] [data-floating-whatsapp] {
   display: none;
 }
+
+/* Pulsante "torna su": nascosto quando è visibile la barra del preventivo */
+html[data-quote-bar="visible"] [data-scroll-top] {
+  display: none;
+}
