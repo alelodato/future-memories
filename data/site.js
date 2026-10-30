@@ -31,7 +31,7 @@ export const site = {
     logo: "/LogoNero.png",
     showreel: "/showreel-desktop.mp4", // es. "/showreel.mp4" (orizzontale, desktop)
     showreelVertical: "showreel-mobile.mp4", // es. "/showreel-verticale.mp4" (9:16, mobile)
-    showreelPoster: "/showreel-desktop.mp4", // es. "/showreel-poster.jpg"
+    showreelPoster: null, // es. "/showreel-poster.jpg"
     aboutPhoto: "/chi-siamo.jpg",
   },
 };
