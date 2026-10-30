@@ -5,7 +5,7 @@ import { ArrowRightIcon } from "@/components/ui/Icons";
 export default function ServicesGrid({ services }) {
   return (
     <>
-    <ul className="grid grid-cols-2 gap-x-3 gap-y-8 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-12">
+    <ul className="grid grid-cols-2 gap-x-3 gap-y-8 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-12">
       {services.map((service, index) => (
         <li key={service.id}>
           <a href={`#${service.id}`} className="group block">

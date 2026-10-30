@@ -1,4 +1,4 @@
-// Gli 8 servizi di matrimonio, nell'ordine e con la numerazione del sito.
+// I 9 servizi di matrimonio, nell'ordine e con la numerazione del sito.
 // media.type: "photo" | "video"; media.image: foto in public/ (null = segnaposto);
 // media.src: eventuale video in public/ (null = nessun video).
 // imagePosition: parte della foto da tenere inquadrata (objectPosition), "50% 50%" = centrata.
@@ -120,6 +120,20 @@ export const services = [
     ],
     imagePosition: "50% 50%",
     media: { type: "video", src: null, image: "/servizio-reel.jpg", label: null },
+  },
+  {
+    id: "pre-post-wedding",
+    number: "09",
+    name: "Pre e post wedding",
+    title: "Prima e dopo il grande giorno",
+    text: "Un servizio foto e video dedicato ai soli sposi, prima o dopo il matrimonio, in una location che vi rappresenta: per vivere l’emozione con calma e senza fretta.",
+    includes: [
+      "Servizio foto, video o entrambi, in base alle vostre richieste",
+      "Location da concordare insieme",
+      "Foto post-prodotte e video emozionale della giornata",
+    ],
+    imagePosition: "50% 50%",
+    media: { type: "photo", src: null, image: null, label: null },
   },
 ];
 
