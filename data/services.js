@@ -133,7 +133,7 @@ export const services = [
       "Foto post-prodotte e video emozionale della giornata",
     ],
     imagePosition: "50% 50%",
-    media: { type: "photo", src: null, image: null, label: null },
+    media: { type: "photo", src: null, image: "/servizio-pre-post-wedding.jpg", label: null },
   },
 ];
 
