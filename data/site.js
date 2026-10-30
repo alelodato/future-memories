@@ -13,8 +13,8 @@ export const site = {
   phoneHref: `tel:+${phoneDigits}`,
   whatsappHref: `https://wa.me/${phoneDigits}`,
   workArea: "Tutta Italia",
-  responseTime: "[tempo]",
-  vatNumber: "P.IVA [da compilare]",
+  responseTime: "24 ore",
+  vatNumber: "P.IVA 17267201006",
 
   instagram: {
     handle: "@futurememories_photoevideo",
@@ -32,7 +32,7 @@ export const site = {
     showreel: null, // es. "/showreel.mp4" (orizzontale, desktop)
     showreelVertical: null, // es. "/showreel-verticale.mp4" (9:16, mobile)
     showreelPoster: null, // es. "/showreel-poster.jpg"
-    aboutPhoto: null, // es. "/chi-siamo.jpg"
+    aboutPhoto: "/chi-siamo.jpg",
   },
 };
 

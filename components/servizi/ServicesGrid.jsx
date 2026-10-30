@@ -4,7 +4,8 @@ import { ArrowRightIcon } from "@/components/ui/Icons";
 
 export default function ServicesGrid({ services }) {
   return (
-    <ul className="grid grid-cols-2 gap-x-3 gap-y-8 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-12">
+    <>
+    <ul className="grid grid-cols-2 gap-x-3 gap-y-8 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-12">
       {services.map((service, index) => (
         <li key={service.id}>
           <a href={`#${service.id}`} className="group block">
@@ -21,18 +22,17 @@ export default function ServicesGrid({ services }) {
           </a>
         </li>
       ))}
-
-      <li className="col-span-2 lg:col-span-1">
-        <Link
-          href="/preventivo"
-          className="group flex h-full min-h-48 flex-col justify-center gap-6 bg-marrone p-6 text-crema lg:p-7"
-        >
-          <span className="font-serif text-3xl leading-tight">Componete il vostro racconto</span>
-          <span className="inline-flex items-center gap-2 self-start font-sans text-xs font-semibold uppercase tracking-[0.2em] group-hover:underline">
-            Richiedi un preventivo <ArrowRightIcon />
-          </span>
-        </Link>
-      </li>
     </ul>
+
+    <Link
+      href="/preventivo"
+      className="group mt-8 flex min-h-48 w-full flex-col justify-center gap-6 bg-marrone p-6 text-crema lg:mt-12 lg:p-7"
+    >
+      <span className="font-serif text-3xl leading-tight">Costruiamo insieme il vostro racconto</span>
+      <span className="inline-flex items-center gap-2 self-start font-sans text-xs font-semibold uppercase tracking-[0.2em] group-hover:underline">
+        Richiedi un preventivo <ArrowRightIcon />
+      </span>
+    </Link>
+    </>
   );
 }

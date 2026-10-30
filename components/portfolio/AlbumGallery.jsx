@@ -1,142 +1,105 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import Lightbox from "@/components/portfolio/Lightbox";
 
-export default function Lightbox({ photos, index, label, onClose, onChange }) {
-    const touch = useRef(null);
-    const [dragY, setDragY] = useState(0);
-    const total = photos.length;
-    const photo = photos[index];
+function isVertical(photo) {
+  return photo.width && photo.height ? photo.height > photo.width : false;
+}
 
-    const prev = useCallback(() => onChange((index - 1 + total) % total), [index, total, onChange]);
-    const next = useCallback(() => onChange((index + 1) % total), [index, total, onChange]);
-
-    // Blocca lo scroll della pagina finché la galleria è aperta.
-    useEffect(() => {
-        const previous = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-        return () => {
-            document.body.style.overflow = previous;
-        };
-    }, []);
-
-    // Tastiera: frecce ed Esc.
-    useEffect(() => {
-        function onKey(e) {
-            if (e.key === "Escape") onClose();
-            if (e.key === "ArrowLeft") prev();
-            if (e.key === "ArrowRight") next();
-        }
-        window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, [onClose, prev, next]);
-
-    // Precarica le foto vicine.
-    useEffect(() => {
-        [photos[(index + 1) % total], photos[(index - 1 + total) % total]].forEach((item) => {
-            if (item) new Image().src = item.url;
-        });
-    }, [index, photos, total]);
-
-    function onTouchStart(e) {
-        const t = e.touches[0];
-        touch.current = { x: t.clientX, y: t.clientY, dx: 0, axis: null };
+// Raggruppa le foto in righe: orizzontale da sola, due verticali vicine in coppia, verticale isolata al centro.
+function buildRows(photos) {
+  const rows = [];
+  let i = 0;
+  while (i < photos.length) {
+    if (!isVertical(photos[i])) {
+      rows.push({ type: "full", items: [i] });
+      i += 1;
+    } else if (i + 1 < photos.length && isVertical(photos[i + 1])) {
+      rows.push({ type: "pair", items: [i, i + 1] });
+      i += 2;
+    } else {
+      rows.push({ type: "single", items: [i] });
+      i += 1;
     }
+  }
+  return rows;
+}
 
-    function onTouchMove(e) {
-        const state = touch.current;
-        if (!state) return;
-        const t = e.touches[0];
-        const dx = t.clientX - state.x;
-        const dy = t.clientY - state.y;
-        if (!state.axis && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) {
-            state.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
-        }
-        state.dx = dx;
-        if (state.axis === "y") setDragY(Math.max(0, dy));
-    }
+function PhotoButton({ photo, index, label, onOpen }) {
+  const ratio = photo.width && photo.height ? `${photo.width} / ${photo.height}` : "3 / 2";
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(index)}
+      aria-label={`Apri la foto ${index + 1} a schermo intero`}
+      className="group block w-full cursor-zoom-in overflow-hidden bg-beige-scuro"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={photo.url}
+        alt={`${label}, foto ${index + 1}`}
+        width={photo.width || undefined}
+        height={photo.height || undefined}
+        loading="lazy"
+        decoding="async"
+        className="block h-full w-full transition duration-700 group-hover:scale-[1.02]"
+        style={{ aspectRatio: ratio, objectFit: "cover" }}
+      />
+    </button>
+  );
+}
 
-    function onTouchEnd() {
-        const state = touch.current;
-        touch.current = null;
-        if (state?.axis === "x" && Math.abs(state.dx) > 50) {
-            if (state.dx < 0) next();
-            else prev();
-        }
-        if (state?.axis === "y" && dragY > 120) onClose();
-        setDragY(0);
-    }
+export default function AlbumGallery({ photos, label }) {
+  const [openIndex, setOpenIndex] = useState(null);
+  if (!photos.length) return null;
 
-    return (
-        <div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Galleria: ${label}`}
-            className="fixed inset-0 z-[100] flex items-center justify-center"
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-        >
-            <div
-                className="absolute inset-0 bg-marrone"
-                style={{ opacity: Math.max(0.3, 0.97 - dragY / 400) }}
-                onClick={onClose}
-            />
+  const rows = buildRows(photos);
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-                key={photo.url}
-                src={photo.url}
-                alt={`${label}, foto ${index + 1} di ${total}`}
-                draggable={false}
-                className="relative max-h-[85svh] max-w-[92vw] select-none lg:max-w-[80vw]"
-                style={{
-                    objectFit: "contain",
-                    transform: `translateY(${dragY}px)`,
-                    transition: dragY ? "none" : "transform 0.2s ease-out",
-                }}
-            />
+  return (
+    <>
+      <div className="space-y-6 lg:space-y-16">
+        {rows.map((row) => {
+          const key = row.items.join("-");
 
-            <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-4 lg:px-10 lg:py-6">
-                <p className="font-sans text-xs uppercase tracking-[0.3em] text-crema">
-                    {index + 1} / {total}
-                </p>
-                <button
-                    type="button"
-                    onClick={onClose}
-                    aria-label="Chiudi galleria"
-                    className="flex h-10 w-10 items-center justify-center text-crema transition hover:opacity-70"
-                >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                        <path d="M6 6l12 12M18 6L6 18" />
-                    </svg>
-                </button>
+          if (row.type === "full") {
+            return (
+              <div
+                key={key}
+                className="relative left-1/2 w-screen -translate-x-1/2 lg:static lg:w-full lg:translate-x-0"
+              >
+                <PhotoButton photo={photos[row.items[0]]} index={row.items[0]} label={label} onOpen={setOpenIndex} />
+              </div>
+            );
+          }
+
+          if (row.type === "pair") {
+            return (
+              <div key={key} className="grid gap-6 lg:grid-cols-2 lg:gap-8">
+                {row.items.map((index) => (
+                  <PhotoButton key={index} photo={photos[index]} index={index} label={label} onOpen={setOpenIndex} />
+                ))}
+              </div>
+            );
+          }
+
+          return (
+            <div key={key} className="lg:mx-auto lg:w-1/2">
+              <PhotoButton photo={photos[row.items[0]]} index={row.items[0]} label={label} onOpen={setOpenIndex} />
             </div>
+          );
+        })}
+      </div>
 
-            {total > 1 && (
-                <>
-                    <button
-                        type="button"
-                        onClick={prev}
-                        aria-label="Foto precedente"
-                        className="absolute left-4 hidden h-12 w-12 items-center justify-center text-crema transition hover:opacity-70 lg:flex"
-                    >
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
-                            <path d="M15 5l-7 7 7 7" />
-                        </svg>
-                    </button>
-                    <button
-                        type="button"
-                        onClick={next}
-                        aria-label="Foto successiva"
-                        className="absolute right-4 hidden h-12 w-12 items-center justify-center text-crema transition hover:opacity-70 lg:flex"
-                    >
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true">
-                            <path d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </>
-            )}
-        </div>
-    );
+      {openIndex !== null && (
+        <Lightbox
+          photos={photos}
+          index={openIndex}
+          label={label}
+          onClose={() => setOpenIndex(null)}
+          onChange={setOpenIndex}
+        />
+      )}
+    </>
+  );
 }

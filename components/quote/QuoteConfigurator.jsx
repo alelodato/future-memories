@@ -569,6 +569,10 @@ export default function QuoteConfigurator({ token, coupleNames, expiresAt }) {
                                 <p className="text-sm text-marrone-medio">Scegliete un servizio per vedere il riepilogo.</p>
                             )}
 
+                            {quote.ready && (
+                                <p className="mt-4 text-xs leading-relaxed text-marrone-medio">{TEXTS.invoice}</p>
+                            )}
+
                             {serverError && (
                                 <p role="alert" className="mt-6 border border-errore bg-crema p-4 text-sm text-errore">
                                     {serverError}
@@ -593,7 +597,7 @@ export default function QuoteConfigurator({ token, coupleNames, expiresAt }) {
                 <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-4">
                     <span className="font-sans text-xs font-semibold uppercase tracking-[0.3em]">Totale</span>
                     <span className="font-serif text-2xl lg:text-3xl">
-                        {!quote.ready ? "—" : quote.custom ? "Su misura" : formatEuro(quote.total)}
+                        {!quote.ready ? "—" : quote.custom ? "Contattaci" : formatEuro(quote.total)}
                     </span>
                 </div>
             </div>

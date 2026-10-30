@@ -66,9 +66,10 @@ html[data-lightbox-open="true"] {
   overflow: hidden;
 }
 
-/* Elenco del portfolio su mobile: un matrimonio per schermata, con aggancio morbido */
+/* Portfolio, scheda Video, su mobile: un racconto per schermata, con aggancio morbido.
+   L'attributo sull'html lo imposta PortfolioTabs solo mentre la scheda Video è attiva. */
 @media (max-width: 63.999rem) {
-  html:has([data-snap-stories]) {
+  html[data-snap-stories="true"] {
     scroll-snap-type: y proximity;
   }
 }

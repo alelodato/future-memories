@@ -24,7 +24,7 @@ export default function ContattiPage() {
           <SectionTitle as="h1" size="xl">
             Contatti
           </SectionTitle>
-          <p className="mt-4 lg:text-lg">Scriveteci, vi rispondiamo entro {site.responseTime}.</p>
+          <p className="mt-4 lg:text-lg">Parliamo del vostro matrimonio: vi rispondiamo entro {site.responseTime}.</p>
 
           <dl className="mt-10 lg:mt-14">
             {contacts.map((item) => (

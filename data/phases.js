@@ -3,7 +3,7 @@ export const phases = [
   {
     number: "01",
     title: "Primo incontro",
-    text: "Ci conosciamo, di persona o in videochiamata: data, location, desideri.",
+    text: "Ci conosciamo, di persona o in videochiamata e definiamo: data, location, desideri.",
   },
   {
     number: "02",
@@ -17,17 +17,17 @@ export const phases = [
   },
   {
     number: "04",
-    title: "Il giorno del matrimonio",
-    text: "Foto e video in un’unica squadra, presenza discreta.",
+    title: "Il\u00A0grande\u00A0giorno",
+    text: "Foto e video con un'unica squadra.",
   },
   {
     number: "05",
     title: "Post-produzione",
-    text: "Editing in stile cinematografico; fino a 2 revisioni del video incluse.",
+    text: "Montaggio in stile cinematografico, curato in ogni dettaglio.",
   },
   {
     number: "06",
     title: "Consegna",
-    text: "Consegna dei prodotti finali selezionati",
+    text: "Consegna dei prodotti finali, da rivivere e condividere per sempre.",
   },
 ];

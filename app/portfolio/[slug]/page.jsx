@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
   if (!result) return {};
   const { wedding } = result;
   return {
-    title: wedding.couple,
+    title: `${wedding.couple} · ${wedding.typeLabel}`,
     description: `${wedding.couple} · ${wedding.location} · ${wedding.date}`,
     openGraph: wedding.cover ? { images: [wedding.cover] } : undefined,
   };
@@ -43,19 +43,24 @@ async function WeddingContent({ params }) {
   if (!result) notFound();
 
   const { wedding, previous, next } = result;
+  const isPhoto = wedding.kind === "foto";
+  const galleryLabel = `${wedding.category === "anniversario" ? "Anniversario" : "Matrimonio"} di ${wedding.couple}`;
 
   return (
     <>
       <section className="bg-sabbia pb-14 pt-8 lg:pb-20 lg:pt-10">
         <Container>
-          <div className="text-center">
+          <div id="racconto-intestazione" className="text-center">
             <Link
-              href="/portfolio"
+              href={isPhoto ? "/portfolio#foto" : "/portfolio"}
               className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-[0.2em] text-marrone-medio hover:underline"
             >
               <ArrowLeftIcon /> Tutti i lavori
             </Link>
-            <h1 className="mt-6 font-serif text-5xl leading-tight lg:text-7xl">
+            <p className="mt-6 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-marrone-medio">
+              {wedding.typeLabel}
+            </p>
+            <h1 className="mt-3 font-serif text-5xl leading-tight lg:text-7xl">
               <CoupleName couple={wedding.couple} />
             </h1>
             <p className="mt-2 font-sans text-xs uppercase tracking-[0.2em] text-marrone-medio lg:text-sm">
@@ -63,28 +68,30 @@ async function WeddingContent({ params }) {
             </p>
           </div>
 
-          <div id="racconto-video" className="mx-auto mt-10 max-w-5xl lg:mt-12">
-            {wedding.vimeoId ? (
-              <VimeoPlayer vimeoId={wedding.vimeoId} title={`Video del matrimonio di ${wedding.couple}`} />
-            ) : (
-              wedding.cover && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={wedding.cover}
-                  alt={`Matrimonio di ${wedding.couple}`}
-                  className="aspect-video w-full"
-                  style={{ objectFit: "cover", objectPosition: wedding.coverPosition }}
-                />
-              )
-            )}
-          </div>
+          {!isPhoto && (
+            <div id="racconto-video" className="mx-auto mt-10 max-w-5xl lg:mt-12">
+              {wedding.vimeoId ? (
+                <VimeoPlayer vimeoId={wedding.vimeoId} title={`Video del matrimonio di ${wedding.couple}`} />
+              ) : (
+                wedding.cover && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={wedding.cover}
+                    alt={`Matrimonio di ${wedding.couple}`}
+                    className="aspect-video w-full"
+                    style={{ objectFit: "cover", objectPosition: wedding.coverPositionDesktop }}
+                  />
+                )
+              )}
+            </div>
+          )}
         </Container>
       </section>
 
       {wedding.photos.length > 0 && (
         <section aria-label="Galleria fotografica" className="bg-sabbia pb-14 lg:pb-24">
           <Container>
-            <AlbumGallery photos={wedding.photos} label={`Matrimonio di ${wedding.couple}`} />
+            <AlbumGallery photos={wedding.photos} label={galleryLabel} />
           </Container>
         </section>
       )}
@@ -93,7 +100,7 @@ async function WeddingContent({ params }) {
 
       {previous && next && <PrevNext previous={previous} next={next} />}
 
-      <StickyQuoteBar targetId="racconto-video" />
+      <StickyQuoteBar targetId={isPhoto ? "racconto-intestazione" : "racconto-video"} />
     </>
   );
 }

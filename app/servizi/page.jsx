@@ -3,7 +3,7 @@ import ServicesGrid from "@/components/servizi/ServicesGrid";
 import Container from "@/components/ui/Container";
 import FinalBand from "@/components/ui/FinalBand";
 import SectionTitle from "@/components/ui/SectionTitle";
-import { services } from "@/data/services";
+import { anniversary, services } from "@/data/services";
 
 export const metadata = {
   title: "Servizi",
@@ -16,14 +16,12 @@ export default function ServiziPage() {
     <>
       <section className="bg-sabbia py-14 lg:py-20">
         <Container>
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
-            <SectionTitle as="h1" size="xl">
-              Servizi
-            </SectionTitle>
-            <p className="max-w-xl leading-relaxed lg:mt-3 lg:text-lg">
-              Foto e video del vostro matrimonio, più tutto ciò che serve per raccontarlo e condividerlo.
-            </p>
-          </div>
+          <SectionTitle as="h1" size="xl">
+            Servizi
+          </SectionTitle>
+          <p className="mt-5 max-w-xl leading-relaxed lg:mt-6 lg:text-lg">
+            Foto, video e molto di più: scegliete come rivivere e condividere il vostro giorno.
+          </p>
 
           <div className="mt-10 lg:mt-14">
             <ServicesGrid services={services} />
@@ -35,13 +33,11 @@ export default function ServiziPage() {
         <ServiceBlock key={service.id} service={service} index={index} />
       ))}
 
+      <ServiceBlock service={anniversary} index={services.length} />
+
       <FinalBand
         label="Un preventivo su misura"
-        title={
-          <>
-            Ogni matrimonio è diverso: scegliete i servizi e vi prepariamo una proposta su <em>misura</em>
-          </>
-        }
+        title="Ogni matrimonio è diverso: componete il vostro pacchetto e vi invieremo una proposta personalizzata."
       />
     </>
   );

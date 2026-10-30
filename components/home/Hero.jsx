@@ -24,18 +24,18 @@ export default function Hero() {
       )}
 
       <div
-        className={`relative mx-auto w-full max-w-6xl px-4 pb-10 pt-24 lg:px-12 lg:py-24 lg:text-center ${
+        className={`relative mx-auto w-full max-w-7xl px-4 pb-10 pt-24 lg:px-12 lg:py-24 lg:text-center ${
           hasVideo ? "text-crema" : "text-marrone"
         }`}
       >
         <Label className={hasVideo ? "mb-5 text-crema lg:mb-8" : "mb-5 lg:mb-8"}>
           Wedding film &amp; photography
         </Label>
-        <h1 className="font-serif text-5xl leading-[1.05] text-balance lg:text-8xl">
-          Raccontiamo il vostro giorno in chiave <em>cinematografica</em>
+        <h1 className="font-serif text-5xl leading-[1.05] text-balance lg:text-6xl xl:text-7xl">
+          Il vostro matrimonio, autentico come l’avete vissuto, emozionale come un <em>film</em>
         </h1>
         <p className="mt-5 text-base lg:mt-6 lg:text-xl">
-          Un ricordo indelebile strutturato ad hoc per voi
+          Un ricordo indelebile, pensato su misura per voi.
         </p>
         <div className="mt-8 flex flex-col gap-3 lg:mt-12 lg:flex-row lg:justify-center lg:gap-5">
           <Button href="/portfolio" fullWidth>

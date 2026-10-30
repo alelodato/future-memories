@@ -8,16 +8,35 @@ import Button from "@/components/ui/Button";
 import { CloseIcon, MenuIcon } from "@/components/ui/Icons";
 import { navLinks } from "@/data/site";
 
-function isActive(pathname, href) {
+// In home "Chi siamo" è attiva mentre la sezione #chi-siamo è visibile, "Homepage" altrimenti.
+function isActive(pathname, href, aboutVisible) {
+  if (href === "/#chi-siamo") return pathname === "/" && aboutVisible;
   if (href.includes("#")) return false;
-  if (href === "/") return pathname === "/";
+  if (href === "/") return pathname === "/" && !aboutVisible;
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [aboutVisible, setAboutVisible] = useState(false);
   const close = () => setOpen(false);
+
+  // La sezione conta come visibile quando occupa la fascia centrale dello schermo.
+  useEffect(() => {
+    if (pathname !== "/") return;
+    const section = document.getElementById("chi-siamo");
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setAboutVisible(entry.isIntersecting),
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      setAboutVisible(false);
+    };
+  }, [pathname]);
 
   // Con Cache Components la pagina resta montata in background:
   // il menu va chiuso quando viene nascosta.
@@ -41,7 +60,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-10 lg:flex">
           <ul className="flex items-center gap-8 xl:gap-10">
             {navLinks.map((link) => {
-              const active = isActive(pathname, link.href);
+              const active = isActive(pathname, link.href, aboutVisible);
               return (
                 <li key={link.href}>
                   <Link
@@ -79,7 +98,7 @@ export default function Navbar() {
         >
           <ul className="flex flex-col px-4 py-4">
             {navLinks.map((link) => {
-              const active = isActive(pathname, link.href);
+              const active = isActive(pathname, link.href, aboutVisible);
               return (
                 <li key={link.href} className="border-b border-beige">
                   <Link

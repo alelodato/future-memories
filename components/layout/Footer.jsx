@@ -45,7 +45,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-beige-scuro py-6 text-xs text-marrone-medio lg:flex-row lg:justify-between">
           <p>
-            © {site.name} · {site.vatNumber}
+            © 2026 {site.name} · Tutti i diritti riservati · {site.vatNumber}
           </p>
           <p>
             <Link href="/privacy-policy" className="hover:underline">Privacy policy</Link>

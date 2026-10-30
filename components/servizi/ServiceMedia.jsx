@@ -3,7 +3,22 @@ import MediaPlaceholder from "@/components/ui/MediaPlaceholder";
 
 /** Foto o video di un servizio, oppure il segnaposto se il file manca. */
 export default function ServiceMedia({ service, tone = "dark", className = "", sizes = "100vw" }) {
-  const { type, src, label } = service.media;
+  const { type, src, image, label } = service.media;
+
+  if (!src && image) {
+    return (
+      <div className={`relative overflow-hidden bg-beige-scuro ${className}`}>
+        <Image
+          src={image}
+          alt={service.title}
+          fill
+          sizes={sizes}
+          className="object-cover"
+          style={{ objectPosition: service.imagePosition ?? "50% 50%" }}
+        />
+      </div>
+    );
+  }
 
   if (!src) {
     return (
