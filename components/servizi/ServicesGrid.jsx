@@ -1,28 +1,11 @@
 import Link from "next/link";
-import ServiceMedia from "@/components/servizi/ServiceMedia";
+import ServicesCards from "@/components/servizi/ServicesCards";
 import { ArrowRightIcon } from "@/components/ui/Icons";
 
 export default function ServicesGrid({ services }) {
   return (
     <>
-    <ul className="grid grid-cols-2 gap-x-3 gap-y-8 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-12">
-      {services.map((service, index) => (
-        <li key={service.id}>
-          <a href={`#${service.id}`} className="group block">
-            <ServiceMedia
-              service={{ ...service, media: { ...service.media, label: null } }}
-              tone={index % 2 === 0 ? "dark" : "light"}
-              sizes="(min-width: 64rem) 25vw, 50vw"
-              className="aspect-[4/3] transition-opacity group-hover:opacity-90"
-            />
-            <p className="mt-3 flex items-baseline gap-3 font-serif text-xl lg:mt-4 lg:gap-5 lg:text-3xl">
-              <span className="text-marrone-medio lining-nums">{service.number}</span>
-              <span className="group-hover:underline">{service.name}</span>
-            </p>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <ServicesCards services={services} />
 
     <Link
       href="/preventivo"

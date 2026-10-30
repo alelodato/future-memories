@@ -5,7 +5,7 @@ import InstagramGrid from "@/components/home/InstagramGrid";
 import IntroLogo from "@/components/home/IntroLogo";
 import Phases from "@/components/home/Phases";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
-import ServicesPreview from "@/components/home/ServicesPreview";
+import ServicesIntro from "@/components/home/ServicesIntro";
 import FinalBand from "@/components/ui/FinalBand";
 
 export const metadata = {
@@ -24,8 +24,8 @@ export default function HomePage() {
         <CinemaVideo />
       </section>
       */}
-      <ServicesPreview />
       <Phases />
+      <ServicesIntro />
       <PortfolioPreview />
       <AboutUs />
       <InstagramGrid />
