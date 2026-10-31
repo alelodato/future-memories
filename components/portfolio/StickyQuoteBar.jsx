@@ -14,7 +14,9 @@ export default function StickyQuoteBar({ targetId }) {
             const target = document.getElementById(targetId);
             const pastTarget = target ? target.getBoundingClientRect().bottom < 0 : window.scrollY > 600;
             const nearEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 500;
-            setVisible(pastTarget && !nearEnd);
+            // La barra esiste solo sotto lg (lg:hidden): da desktop non va segnalata come visibile.
+            const mobile = window.matchMedia("(max-width: 63.999rem)").matches;
+            setVisible(mobile && pastTarget && !nearEnd);
         }
 
         function onScroll() {

@@ -4,7 +4,7 @@ import CoupleName from "@/components/portfolio/CoupleName";
 /** Scheda di un lavoro fotografico nella sezione Foto del portfolio. */
 export default function PhotoWorkCard({ work, headingLevel: Heading = "h3" }) {
   return (
-    <Link href={`/portfolio/${work.slug}`} className="group block">
+    <Link href={`/portfolio/${work.slug}`} className="hover-lift group block">
       <div className="relative aspect-[4/5] overflow-hidden bg-beige-scuro">
         {work.cover && (
           // eslint-disable-next-line @next/next/no-img-element

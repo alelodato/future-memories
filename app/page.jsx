@@ -5,6 +5,7 @@ import InstagramGrid from "@/components/home/InstagramGrid";
 import IntroLogo from "@/components/home/IntroLogo";
 import Phases from "@/components/home/Phases";
 import PortfolioPreview from "@/components/home/PortfolioPreview";
+import ServicesIntro from "@/components/home/ServicesIntro";
 import FinalBand from "@/components/ui/FinalBand";
 
 export const metadata = {
@@ -24,10 +25,11 @@ export default function HomePage() {
       </section>
       */}
       <Phases />
+      <ServicesIntro />
       <PortfolioPreview />
       <AboutUs />
       <InstagramGrid />
-      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} />
+      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-finale.jpg" />
     </>
   );
 }

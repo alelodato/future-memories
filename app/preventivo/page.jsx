@@ -28,7 +28,7 @@ export default function PreventivoPage() {
   return (
     <section className="bg-sabbia py-14 lg:py-20">
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-4">
+        <div data-reveal className="lg:col-span-4">
           <SectionTitle as="h1" size="lg">
             Richiedi un <em>preventivo</em>
           </SectionTitle>
@@ -38,7 +38,7 @@ export default function PreventivoPage() {
           <DirectContact className="mt-16 hidden lg:block" />
         </div>
 
-        <div className="lg:col-span-8">
+        <div data-reveal="fade" style={{ "--reveal-delay": "120ms" }} className="lg:col-span-8">
           <QuoteForm />
           <DirectContact className="mt-12 lg:hidden" />
         </div>

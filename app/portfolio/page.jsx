@@ -44,12 +44,12 @@ export default async function PortfolioPage() {
             if (!items.length) return null;
             return (
               <section key={group.id} aria-labelledby={`gruppo-${group.id}`}>
-                <h2 id={`gruppo-${group.id}`} className="font-serif text-3xl lg:text-4xl">
+                <h2 id={`gruppo-${group.id}`} data-reveal className="font-serif text-3xl lg:text-4xl">
                   {group.title}
                 </h2>
                 <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 lg:mt-8 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">
-                  {items.map((work) => (
-                    <li key={work.slug}>
+                  {items.map((work, index) => (
+                    <li key={work.slug} data-reveal style={{ "--reveal-delay": `${Math.min(index, 4) * 120}ms` }}>
                       <PhotoWorkCard work={work} />
                     </li>
                   ))}
@@ -69,10 +69,12 @@ export default async function PortfolioPage() {
       {/* snap-start: l'inizio della pagina è un punto di aggancio, così su mobile si apre dal titolo */}
       <section className="snap-start bg-crema pt-14 lg:pb-10 lg:pt-20">
         <Container>
-          <SectionTitle as="h1" size="xl">
-            Portfolio
-          </SectionTitle>
-          <p className="mt-3 text-marrone-medio lg:mt-4 lg:text-lg">Le storie di chi ci ha scelto.</p>
+          <div data-reveal="fade">
+            <SectionTitle as="h1" size="xl">
+              Portfolio
+            </SectionTitle>
+          </div>
+          <p data-reveal="fade" style={{ "--reveal-delay": "120ms" }} className="mt-3 text-marrone-medio lg:mt-4 lg:text-lg">Le storie di chi ci ha scelto.</p>
         </Container>
 
         <PortfolioTabs video={videoPanel} foto={photoPanel} />

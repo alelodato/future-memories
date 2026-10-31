@@ -17,10 +17,12 @@ export default function ServiziPage() {
     <>
       <section className="bg-sabbia py-14 lg:py-20">
         <Container>
-          <SectionTitle as="h1" size="xl">
-            Servizi
-          </SectionTitle>
-          <p className="mt-5 max-w-xl leading-relaxed lg:mt-6 lg:text-lg">
+          <div data-reveal>
+            <SectionTitle as="h1" size="xl">
+              Servizi
+            </SectionTitle>
+          </div>
+          <p data-reveal style={{ "--reveal-delay": "120ms" }} className="mt-5 max-w-xl leading-relaxed lg:mt-6 lg:text-lg">
             Foto, video e molto di più: scegliete come rivivere e condividere il vostro giorno.
           </p>
 

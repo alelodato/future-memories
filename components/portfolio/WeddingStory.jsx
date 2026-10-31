@@ -8,7 +8,7 @@ export default function WeddingStory({ wedding, index, headingLevel: Heading = "
   const alt = `Anteprima del matrimonio di ${wedding.couple}`;
 
   return (
-    <article className="snap-start lg:py-16">
+    <article data-reveal="fade" className="snap-start lg:py-16">
       <Link href={`/portfolio/${wedding.slug}`} className="group block lg:mx-auto lg:max-w-6xl lg:px-12">
         {/* Testo sopra il video, solo da lg */}
         <div className="hidden lg:mb-8 lg:flex lg:items-end lg:justify-between lg:gap-12">

@@ -54,7 +54,7 @@ async function WeddingContent({ params }) {
     <>
       <section className="bg-sabbia pb-14 pt-8 lg:pb-20 lg:pt-10">
         <Container>
-          <div id="racconto-intestazione" className="text-center">
+          <div id="racconto-intestazione" data-reveal className="text-center">
             <Link
               href={isPhoto ? "/portfolio#foto" : "/portfolio"}
               className="inline-flex items-center gap-2 font-sans text-xs uppercase tracking-[0.2em] text-marrone-medio hover:underline"

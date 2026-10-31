@@ -12,7 +12,7 @@ export default function AboutUs() {
     <section id="chi-siamo" className="bg-crema py-20 lg:py-32">
       {/* Ordine su mobile: citazione, foto, storia, pulsante. Da lg la foto occupa la colonna sinistra. */}
       <Container className="grid gap-y-0 lg:grid-cols-2 lg:grid-rows-[1fr_auto_auto_auto_1fr] lg:gap-x-16">
-        <div className="lg:col-start-2 lg:row-start-2">
+        <div data-reveal className="lg:col-start-2 lg:row-start-2">
           <Label className="mb-6">Chi siamo</Label>
           <blockquote className="font-serif text-3xl leading-tight text-balance lg:text-5xl">
             “Raccontiamo il vostro matrimonio attraverso immagini che <em>restano</em>.”
@@ -21,7 +21,7 @@ export default function AboutUs() {
 
         <figure className="mt-12 lg:col-start-1 lg:row-span-5 lg:row-start-1 lg:mt-0 lg:self-center">
           {site.media.aboutPhoto ? (
-            <div className="relative aspect-[4/5] overflow-hidden bg-beige-scuro lg:aspect-square">
+            <div data-reveal="image" className="relative aspect-[4/5] overflow-hidden bg-beige-scuro lg:aspect-square">
               <Image
                 src={site.media.aboutPhoto}
                 alt="Il team Future Memories nel backstage"
@@ -38,7 +38,7 @@ export default function AboutUs() {
           </Label>
         </figure>
 
-        <div className="lg:col-start-2 lg:row-start-3">
+        <div data-reveal style={{ "--reveal-delay": "120ms" }} className="lg:col-start-2 lg:row-start-3">
           <Label as="h3" className="mb-3 mt-10 lg:mt-14">
             La nostra storia
           </Label>
@@ -47,7 +47,7 @@ export default function AboutUs() {
           </p>
         </div>
 
-        <div className="mt-10 lg:col-start-2 lg:row-start-4 lg:mt-14">
+        <div data-reveal style={{ "--reveal-delay": "240ms" }} className="mt-10 lg:col-start-2 lg:row-start-4 lg:mt-14">
           <Button href="/portfolio" variant="outline" fullWidth>
             Guarda i nostri lavori
           </Button>

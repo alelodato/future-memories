@@ -69,7 +69,7 @@ function PostCard({ post, profile }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={post.caption ? `Apri su Instagram: ${post.caption.slice(0, 100)}` : "Apri il post su Instagram"}
-      className="group flex h-full w-full flex-col border border-beige-scuro bg-white/60 transition-colors hover:border-marrone-medio"
+      className="hover-lift group flex h-full w-full flex-col border border-beige-scuro bg-white/60 transition-colors hover:border-marrone-medio"
     >
       {username && (
         <div className="flex items-center gap-3 px-4 py-3">
@@ -190,7 +190,7 @@ export default function InstagramCarousel({ posts, profile }) {
     <div>
       <ul
         ref={trackRef}
-        className="relative left-1/2 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:w-full lg:translate-x-0 lg:scroll-pl-0 lg:gap-6 lg:px-0"
+        className="relative left-1/2 -mb-10 -mt-4 flex w-screen -translate-x-1/2 snap-x snap-mandatory scroll-pl-6 gap-4 overflow-x-auto px-6 pb-10 pt-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:static lg:w-full lg:translate-x-0 lg:scroll-pl-0 lg:gap-6 lg:px-0"
       >
         {posts.map((post) => (
           <li key={post.id} className="flex w-[82%] shrink-0 snap-start sm:w-[45%] lg:w-[calc((100%-3rem)/3)]">
