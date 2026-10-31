@@ -137,3 +137,12 @@ html[data-quote-bar="visible"] [data-scroll-top] {
     box-shadow: 0 22px 40px -20px rgb(42 30 22 / 0.4);
   }
 }
+
+/* Foto della hero del portfolio: si svelano dal basso con una dissolvenza */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-on [data-reveal="image-fade"] {
+    opacity: 0;
+    transform: none;
+    clip-path: inset(100% 0 0 0);
+  }
+}
