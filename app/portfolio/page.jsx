@@ -124,7 +124,7 @@ export default async function PortfolioPage() {
         <PortfolioTabs hero={hero} video={videoPanel} foto={photoPanel} />
       </section>
 
-      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} />
+      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-portfolio.jpg" />
     </>
   );
 }

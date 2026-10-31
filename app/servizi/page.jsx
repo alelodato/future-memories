@@ -41,6 +41,7 @@ export default function ServiziPage() {
       <FinalBand
         label="Un preventivo su misura"
         title="Ogni matrimonio è diverso: componete il vostro pacchetto e vi invieremo una proposta personalizzata."
+        image="/cta-servizi.jpg"
       />
     </>
   );
