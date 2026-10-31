@@ -146,3 +146,13 @@ html[data-quote-bar="visible"] [data-scroll-top] {
     clip-path: inset(100% 0 0 0);
   }
 }
+
+/* Indicatore "Scroll" della hero del portfolio (mobile): un tratto che scorre lungo la linea */
+@keyframes scroll-cue {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(200%);
+  }
+}

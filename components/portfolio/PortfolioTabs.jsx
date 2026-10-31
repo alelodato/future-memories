@@ -39,7 +39,7 @@ export default function PortfolioTabs({ hero, video, foto }) {
 
   return (
     <>
-      <div className="relative flex h-[calc(100svh-var(--navbar-height))] snap-start flex-col justify-end overflow-hidden pb-24 lg:block lg:h-auto lg:overflow-visible lg:pb-0">
+      <div className="relative flex h-[calc(100svh-var(--navbar-height))] snap-start flex-col justify-end overflow-hidden pb-10 lg:block lg:h-auto lg:overflow-visible lg:pb-0">
         {hero}
         <Container className="relative">
           <div role="tablist" aria-label="Tipo di lavori" data-reveal="fade" style={{ "--reveal-delay": "240ms" }} className="mt-8 inline-flex border border-crema lg:mt-10 lg:border-marrone">
