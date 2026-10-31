@@ -25,7 +25,7 @@ export default async function PortfolioPage() {
   const photos = works.filter((work) => work.kind === "foto");
 
   const videoPanel = videos.length ? (
-    <div className="mt-10 space-y-px lg:mt-6 lg:space-y-0">
+    <div className="space-y-px lg:mt-6 lg:space-y-0">
       {videos.map((wedding, index) => (
         <WeddingStory key={wedding.slug} wedding={wedding} index={index} />
       ))}
@@ -107,15 +107,13 @@ export default async function PortfolioPage() {
         </div>
       </Container>
 
-      {/* Sotto lg: invito a scorrere */}
-      <svg
-        viewBox="0 0 16 40"
-        fill="none"
-        aria-hidden="true"
-        className="absolute bottom-6 left-1/2 h-10 w-4 -translate-x-1/2 animate-bounce text-crema [animation-duration:2.4s] motion-reduce:animate-none lg:hidden"
-      >
-        <path d="M8 1v37M2 32l6 6 6-6" stroke="currentColor" strokeWidth="1" />
-      </svg>
+      {/* Sotto lg: invito a scorrere, sul lato destro sopra il pulsante WhatsApp */}
+      <div aria-hidden="true" className="absolute bottom-24 right-4 flex flex-col items-center gap-3 text-crema lg:hidden">
+        <span className="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.35em] [writing-mode:vertical-rl]">Scroll</span>
+        <span className="relative h-14 w-px overflow-hidden bg-crema/30">
+          <span className="absolute inset-x-0 top-0 h-1/2 bg-crema motion-safe:animate-[scroll-cue_2.4s_cubic-bezier(0.65,0,0.35,1)_infinite]" />
+        </span>
+      </div>
     </>
   );
 
@@ -126,7 +124,7 @@ export default async function PortfolioPage() {
         <PortfolioTabs hero={hero} video={videoPanel} foto={photoPanel} />
       </section>
 
-      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} />
+      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-portfolio.jpg" />
     </>
   );
 }
