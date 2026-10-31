@@ -8,8 +8,12 @@ const TABS = [
   { id: "foto", label: "Foto" },
 ];
 
-/** Selettore Video · Foto del portfolio: mostra una sezione alla volta. */
-export default function PortfolioTabs({ video, foto }) {
+/**
+ * Selettore Video · Foto del portfolio: mostra una sezione alla volta.
+ * hero (facoltativa): l'intestazione della pagina. Sotto lg intestazione e selettore formano
+ * una schermata intera (alta come le storie video) con il selettore in fondo, in versione chiara.
+ */
+export default function PortfolioTabs({ hero, video, foto }) {
   const [active, setActive] = useState("video");
 
   // Apre direttamente la scheda Foto se l'indirizzo termina con #foto (es. dal link "Tutti i lavori" di una galleria).
@@ -35,29 +39,32 @@ export default function PortfolioTabs({ video, foto }) {
 
   return (
     <>
-      <Container>
-        <div role="tablist" aria-label="Tipo di lavori" data-reveal="fade" style={{ "--reveal-delay": "240ms" }} className="mt-8 inline-flex border border-marrone lg:mt-10">
-          {TABS.map((tab) => {
-            const selected = active === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                role="tab"
-                id={`scheda-${tab.id}`}
-                aria-selected={selected}
-                aria-controls={`pannello-${tab.id}`}
-                onClick={() => choose(tab.id)}
-                className={`min-w-28 px-8 py-3 font-sans text-xs font-semibold uppercase tracking-[0.25em] transition-colors ${
-                  selected ? "bg-marrone text-crema" : "text-marrone hover:bg-beige"
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-      </Container>
+      <div className="relative flex h-[calc(100svh-var(--navbar-height))] snap-start flex-col justify-end overflow-hidden pb-24 lg:block lg:h-auto lg:overflow-visible lg:pb-0">
+        {hero}
+        <Container className="relative">
+          <div role="tablist" aria-label="Tipo di lavori" data-reveal="fade" style={{ "--reveal-delay": "240ms" }} className="mt-8 inline-flex border border-crema lg:mt-10 lg:border-marrone">
+            {TABS.map((tab) => {
+              const selected = active === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  id={`scheda-${tab.id}`}
+                  aria-selected={selected}
+                  aria-controls={`pannello-${tab.id}`}
+                  onClick={() => choose(tab.id)}
+                  className={`min-w-28 px-8 py-3 font-sans text-xs font-semibold uppercase tracking-[0.25em] transition-colors ${
+                    selected ? "bg-crema text-marrone lg:bg-marrone lg:text-crema" : "text-crema hover:bg-crema/15 lg:text-marrone lg:hover:bg-beige"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </Container>
+      </div>
 
       <div id="pannello-video" role="tabpanel" aria-labelledby="scheda-video" hidden={active !== "video"}>
         {video}
