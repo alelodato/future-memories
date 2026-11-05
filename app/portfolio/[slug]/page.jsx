@@ -17,6 +17,16 @@ export async function generateStaticParams() {
   return weddings.length ? weddings.map((wedding) => ({ slug: wedding.slug })) : [{ slug: "nessun-matrimonio" }];
 }
 
+// Didascalia per la description: a capo e spazi multipli diventano uno spazio;
+// oltre i 155 caratteri si taglia all'ultima parola intera e si aggiunge "…".
+function captionDescription(caption, max = 155) {
+  const text = caption.replace(/\s+/g, " ").trim();
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\s.,;:!?–-]+$/, "")}…`;
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const result = await getWedding(slug);
@@ -24,13 +34,27 @@ export async function generateMetadata({ params }) {
   const { wedding } = result;
   return {
     title: `${wedding.couple} · ${wedding.typeLabel}`,
-    description: `${wedding.typeLabel} di ${wedding.couple} · ${wedding.location}, ${wedding.date.toLowerCase()}. Un racconto firmato Future Memories, foto e video in tutta Italia.`,
+    description: wedding.caption
+      ? captionDescription(wedding.caption)
+      : `${wedding.typeLabel} di ${wedding.couple} · ${wedding.location}, ${wedding.date.toLowerCase()}. Un racconto firmato Future Memories, foto e video in tutta Italia.`,
     alternates: { canonical: `/portfolio/${slug}` },
     // Senza copertina la chiave manca del tutto, così la scheda eredita l'Open Graph del layout.
     ...(wedding.cover && {
       openGraph: { type: "website", locale: "it_IT", siteName: "Future Memories", images: [wedding.cover] },
     }),
   };
+}
+
+// Didascalia del progetto: rispetta gli a capo scritti nel gestionale.
+function Caption({ text }) {
+  return (
+    <p
+      data-reveal
+      className="mx-auto mt-10 max-w-[42rem] whitespace-pre-line break-words text-center font-serif text-xl leading-relaxed text-marrone lg:mt-12 lg:text-2xl"
+    >
+      {text}
+    </p>
+  );
 }
 
 export default function WeddingPage({ params }) {
@@ -72,6 +96,9 @@ async function WeddingContent({ params }) {
             </p>
           </div>
 
+          {/* Foto: didascalia tra l'intestazione e la galleria */}
+          {isPhoto && wedding.caption && <Caption text={wedding.caption} />}
+
           {!isPhoto && (
             <div id="racconto-video" className="mx-auto mt-10 max-w-5xl lg:mt-12">
               {wedding.vimeoId ? (
@@ -89,6 +116,9 @@ async function WeddingContent({ params }) {
               )}
             </div>
           )}
+
+          {/* Video: didascalia subito sotto il player */}
+          {!isPhoto && wedding.caption && <Caption text={wedding.caption} />}
         </Container>
       </section>
 
