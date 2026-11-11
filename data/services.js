@@ -29,7 +29,7 @@ export const services = [
       "Riprese integrate nel film e nel wedding trailer",
     ],
     imagePosition: "50% 50%",
-    media: { type: "video", src: null, image: "/servizio-drone.jpg", label: null },
+    media: { type: "video", src: null, image: "/servizio-drone.webp", label: null },
   },
   {
     id: "wedding-trailer",
@@ -43,7 +43,7 @@ export const services = [
       "Formato adatto a pc e smartphone",
     ],
     imagePosition: "40% 50%",
-    media: { type: "video", src: null, image: "/servizio-wedding-trailer.jpg", label: null },
+    media: { type: "video", src: null, image: "/servizio-wedding-trailer.webp", label: null },
   },
   {
     id: "foto",
@@ -58,7 +58,7 @@ export const services = [
       "Album (su richiesta)",
     ],
     imagePosition: "50% 25%",
-    media: { type: "photo", src: null, image: "/servizio-foto.jpg", label: null },
+    media: { type: "photo", src: null, image: "/servizio-foto.webp", label: null },
   },
   {
     id: "trailer-in-diretta",
@@ -75,7 +75,7 @@ export const services = [
     media: {
       type: "video",
       src: null,
-      image: "/servizio-trailer-in-diretta.jpg",
+      image: "/servizio-trailer-in-diretta.webp",
       label: "Proiezione del trailer dopo la torta",
     },
   },
@@ -91,7 +91,7 @@ export const services = [
       "Da concordare prima del matrimonio",
     ],
     imagePosition: "50% 50%",
-    media: { type: "video", src: null, image: "/servizio-discorsi-integrali.jpg", label: null },
+    media: { type: "video", src: null, image: "/servizio-discorsi-integrali.webp", label: null },
   },
   {
     id: "videoclip",
@@ -119,7 +119,7 @@ export const services = [
       "Consegna entro 10 giorni dal matrimonio",
     ],
     imagePosition: "50% 50%",
-    media: { type: "video", src: null, image: "/servizio-reel.jpg", label: null },
+    media: { type: "video", src: null, image: "/servizio-reel.webp", label: null },
   },
   {
     id: "pre-post-wedding",
@@ -133,7 +133,7 @@ export const services = [
       "Foto post-prodotte e video emozionale della giornata",
     ],
     imagePosition: "50% 50%",
-    media: { type: "photo", src: null, image: "/servizio-pre-post-wedding.jpg", label: null },
+    media: { type: "photo", src: null, image: "/servizio-pre-post-wedding.webp", label: null },
   },
 ];
 
@@ -148,5 +148,5 @@ export const anniversary = {
     "Foto, video o entrambi, in base alle vostre richieste",
   ],
   imagePosition: "50% 50%",
-  media: { type: "photo", src: null, image: "/anniversario.jpg", label: null },
+  media: { type: "photo", src: null, image: "/anniversario.webp", label: null },
 };

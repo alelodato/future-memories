@@ -59,7 +59,7 @@ export default function ContattiPage() {
         <aside data-reveal style={{ "--reveal-delay": "120ms" }} className="relative flex flex-col justify-center overflow-hidden bg-crema p-8 lg:col-span-5 lg:bg-beige lg:p-10">
           {/* Da lg: foto di sfondo con velo marrone (sotto lg non viene caricata) */}
           <div data-reveal="image-fade" className="absolute inset-0 hidden lg:block" aria-hidden="true">
-            <Image src="/contatti.jpg" alt="" fill sizes="(min-width: 80rem) 520px, 40vw" className="object-cover" />
+            <Image src="/contatti.webp" alt="" fill sizes="(min-width: 80rem) 520px, 40vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-marrone/55 to-marrone/75" />
           </div>
           <h2 className="relative font-serif text-3xl leading-tight text-balance lg:text-5xl lg:text-crema">
