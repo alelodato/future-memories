@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Label from "@/components/ui/Label";
@@ -20,7 +21,7 @@ const contacts = [
 
 export default function ContattiPage() {
   return (
-    <section className="bg-crema py-14 lg:py-24">
+    <section className="bg-beige-scuro py-14 lg:bg-crema lg:py-24">
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div data-reveal className="lg:col-span-7">
           <SectionTitle as="h1" size="xl">
@@ -32,7 +33,7 @@ export default function ContattiPage() {
             {contacts.map((item) => (
               <div
                 key={item.label}
-                className="grid gap-1 border-b border-beige py-5 lg:grid-cols-[16rem_1fr] lg:items-baseline lg:gap-6 lg:py-7"
+                className="grid gap-1 border-b border-crema py-5 lg:grid-cols-[16rem_1fr] lg:items-baseline lg:gap-6 lg:border-beige lg:py-7"
               >
                 <dt>
                   <Label as="span">{item.label}</Label>
@@ -55,15 +56,20 @@ export default function ContattiPage() {
           </dl>
         </div>
 
-        <aside data-reveal style={{ "--reveal-delay": "120ms" }} className="flex flex-col justify-center bg-beige p-8 lg:col-span-5 lg:p-10">
-          <h2 className="font-serif text-3xl leading-tight text-balance lg:text-5xl">
+        <aside data-reveal style={{ "--reveal-delay": "120ms" }} className="relative flex flex-col justify-center overflow-hidden bg-crema p-8 lg:col-span-5 lg:bg-beige lg:p-10">
+          {/* Da lg: foto di sfondo con velo marrone (sotto lg non viene caricata) */}
+          <div data-reveal="image-fade" className="absolute inset-0 hidden lg:block" aria-hidden="true">
+            <Image src="/contatti.jpg" alt="" fill sizes="(min-width: 80rem) 520px, 40vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-marrone/55 to-marrone/75" />
+          </div>
+          <h2 className="relative font-serif text-3xl leading-tight text-balance lg:text-5xl lg:text-crema">
             Pronti a raccontare il <em>vostro giorno</em>?
           </h2>
-          <div className="mt-10 flex flex-col gap-4 lg:mt-16">
-            <Button href="/preventivo" className="w-full">
+          <div className="relative mt-10 flex flex-col gap-4 lg:mt-16">
+            <Button href="/preventivo" variant="solid-cream" className="w-full">
               Richiedi un preventivo
             </Button>
-            <Button href={site.whatsappHref} variant="outline" className="w-full">
+            <Button href={site.whatsappHref} variant="outline-light" className="w-full">
               Scrivici su WhatsApp
             </Button>
           </div>
