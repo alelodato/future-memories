@@ -66,13 +66,13 @@ export default async function PortfolioPage() {
   );
 
   // Da lg: tre foto verticali sfalsate a destra del titolo (la centrale più in basso).
-  const heroPhotos = ["/portfolio-1.jpg", "/portfolio-2.jpg", "/portfolio-3.jpg"];
+  const heroPhotos = ["/portfolio-1.webp", "/portfolio-2.webp", "/portfolio-3.webp"];
 
   // Sotto lg: foto a schermo intero con velo marrone (senza animazioni) e invito a scorrere sul lato destro.
   const heroBackground = (
     <>
       <div className="absolute inset-0 lg:hidden" aria-hidden="true">
-        <Image src="/portfolio-1.jpg" alt="" fill sizes="100vw" fetchPriority="high" className="object-cover" />
+        <Image src="/portfolio-1.webp" alt="" fill sizes="100vw" fetchPriority="high" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-marrone/35 to-marrone/80" />
       </div>
 
@@ -125,7 +125,7 @@ export default async function PortfolioPage() {
         <PortfolioTabs heroBackground={heroBackground} heroText={heroText} heroPhotos={heroPhotosGrid} video={videoPanel} foto={photoPanel} />
       </section>
 
-      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-portfolio.jpg" />
+      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-portfolio.webp" />
     </>
   );
 }

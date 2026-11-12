@@ -33,7 +33,7 @@ export const site = {
     showreel: "/showreel-desktop.mp4", // es. "/showreel.mp4" (orizzontale, desktop)
     showreelVertical: "/showreel-mobile.mp4", // es. "/showreel-verticale.mp4" (9:16, mobile)
     showreelPoster: null, // es. "/showreel-poster.jpg"
-    aboutPhoto: "/chi-siamo.jpg",
+    aboutPhoto: "/chi-siamo.webp",
   },
 };
 

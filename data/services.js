@@ -15,7 +15,7 @@ export const services = [
       "Consegna in alta qualità",
     ],
     imagePosition: "50% 50%",
-    media: { type: "video", src: null, image: "/servizio-video.jpg", label: null },
+    media: { type: "video", src: null, image: "/servizio-video.webp", label: null },
   },
   {
     id: "drone",
@@ -105,7 +105,7 @@ export const services = [
       "Montaggio in giornata, pronto per la proiezione",
     ],
     imagePosition: "42% 50%",
-    media: { type: "video", src: null, image: "/servizio-videoclip.jpg", label: null },
+    media: { type: "video", src: null, image: "/servizio-videoclip.webp", label: null },
   },
   {
     id: "reel-instagram",

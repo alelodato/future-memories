@@ -23,7 +23,7 @@ export default function ServicesIntro() {
           className="relative mt-12 aspect-[4/5] overflow-hidden bg-beige-scuro lg:col-start-2 lg:row-span-4 lg:row-start-1 lg:mt-0 lg:self-center"
         >
           <Image
-            src="/servizio-video.jpg"
+            src="/servizio-video.webp"
             alt=""
             fill
             sizes="(min-width: 64rem) 50vw, 100vw"

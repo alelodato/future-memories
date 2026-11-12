@@ -32,7 +32,7 @@ export default function PreventivoPage() {
         <div data-reveal className="lg:relative lg:col-span-4 lg:overflow-hidden lg:p-12 lg:[&_h1]:text-crema">
           {/* Da lg: la colonna diventa un riquadro con foto di sfondo e velo marrone (sotto lg non viene caricata) */}
           <div data-reveal="image-fade" className="absolute inset-0 hidden lg:block" aria-hidden="true">
-            <Image src="/preventivo.jpg" alt="" fill sizes="(min-width: 80rem) 400px, 33vw" className="object-cover" />
+            <Image src="/preventivo.webp" alt="" fill sizes="(min-width: 80rem) 400px, 33vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-marrone/55 to-marrone/75" />
           </div>
           <SectionTitle as="h1" size="lg" className="lg:relative">
