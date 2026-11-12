@@ -29,7 +29,7 @@ export default function HomePage() {
       <PortfolioPreview />
       <AboutUs />
       <InstagramGrid />
-      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-finale.jpg" imagePosition="50% 65%" />
+      <FinalBand title={<>Raccontaci il <em>vostro giorno</em></>} image="/cta-finale.webp" imagePosition="50% 65%" />
     </>
   );
 }
